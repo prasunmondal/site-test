@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mondal Brothers Poultry</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#f8b400">
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js");
+    }
+  </script>
+</head>
+<body>
+
+  <header class="hero">
+    <h1>Mondal Brothers Poultry</h1>
+    <p>Fresh Farm Chicken Delivered Daily to Shops & Hotels</p>
+    <a href="https://wa.me/919XXXXXXXXX?text=Hi,+I+want+to+place+an+order."
+       class="btn-whatsapp" target="_blank">Order on WhatsApp</a>
+  </header>
+
+  <main>
+    <section class="accordion">
+      <button class="accordion-header">🧾 Quick Order Form</button>
+      <div class="accordion-content">
+        <form id="orderForm">
+          <input type="text" id="name" placeholder="Your Name" required />
+          <input type="text" id="shop" placeholder="Shop Name" required />
+          <input type="number" id="quantity" placeholder="Quantity (kg)" required />
+          <select id="product">
+            <option value="Live Broiler">Live Broiler Chicken</option>
+            <option value="Dressed">Dressed Chicken</option>
+            <option value="Liver">Liver & Gizzard</option>
+          </select>
+          <button type="submit">Send Order via WhatsApp</button>
+        </form>
+      </div>
+
+      <button class="accordion-header">📞 Contact Details</button>
+      <div class="accordion-content">
+        <p><b>Phone:</b> <a href="tel:+919XXXXXXXXX">+91 9XXXXXXXXX</a></p>
+        <p><b>Address:</b> Arambagh Road, Bhubaneswar</p>
+        <p><b>Working Hours:</b> 6 AM – 9 PM</p>
+        <a href="tel:+919XXXXXXXXX" class="call-btn">📞 Call Now</a>
+      </div>
+
+      <button class="accordion-header">💰 Payment Options</button>
+      <div class="accordion-content">
+        <p>You can pay using any of the following methods:</p>
+        <div class="payment-box">
+          <ul>
+            <li><b>UPI ID:</b> mondalbrothers@upi</li>
+            <li><b>Bank Transfer:</b> Mondal Brothers Poultry<br>Canara Bank — A/C XXXX1234</li>
+            <li><b>PhonePe / GPay / Paytm</b> accepted</li>
+          </ul>
+          <div class="qr-section">
+            <p><b>Scan to Pay:</b></p>
+            <img src="images/payment-qr.jpg" alt="Payment QR" class="qr-code" />
+          </div>
+        </div>
+      </div>
+
+      <button class="accordion-header">📍 Location</button>
+      <div class="accordion-content">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!..."
+          width="100%" height="250" style="border:0;" allowfullscreen="">
+        </iframe>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Mondal Brothers Poultry | Built with ❤️ in Bhubaneswar
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
