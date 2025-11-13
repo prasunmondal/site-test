@@ -13,7 +13,7 @@ document.getElementById("orderForm").addEventListener("submit", (e) => {
   const qty = document.getElementById("quantity").value;
   const product = document.getElementById("product").value;
   const message = `Hello, I am ${name} from ${shop}. I want to order ${qty} kg of ${product}.`;
-  const phone = "91XXXXXXXXXX"; // replace with your number
+  const phone = "919679004046"; // replace with your number
   window.open('https://wa.me/${phone}?text=${encodeURIComponent(message)}', "_blank");
 });
 
