@@ -14,7 +14,7 @@ document.getElementById("orderForm").addEventListener("submit", (e) => {
   const product = document.getElementById("product").value;
   const message = `Hello, I am ${name} from ${shop}. I want to order ${qty} kg of ${product}.`;
   const phone = "91XXXXXXXXXX"; // replace with your number
-  window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, "_blank");
+  window.open('https://wa.me/${phone}?text=${encodeURIComponent(message)}', "_blank");
 });
 
 let deferredPrompt;
