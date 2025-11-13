@@ -16,3 +16,21 @@ document.getElementById("orderForm").addEventListener("submit", (e) => {
   const phone = "91XXXXXXXXXX"; // replace with your number
   window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, "_blank");
 });
+
+let deferredPrompt;
+const installBtn = document.getElementById("installBtn");
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.style.display = "block";
+});
+
+installBtn.addEventListener("click", async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const result = await deferredPrompt.userChoice;
+  console.log("Install result:", result.outcome);
+  deferredPrompt = null;
+  installBtn.style.display = "none";
+});

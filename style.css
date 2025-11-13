@@ -144,6 +144,19 @@ form button:hover {
   box-shadow: var(--shadow);
 }
 
+.install-btn {
+  display: none;
+  background: #25D366;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 25px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 20px auto;
+  display: block;
+}
+
 footer {
   text-align: center;
   background: #333;
