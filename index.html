@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +11,11 @@
   <script>
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("service-worker.js");
+    }
+    function payNow() {
+      let amount = document.getElementById("amt").value;
+      let upi = `upi://pay?pa=prasun@okaxis&pn=Mondal%20Brothers&am=${amount}&cu=INR&tn=Payment`;
+      window.location.href = upi;
     }
   </script>
 </head>
@@ -42,6 +48,8 @@
       <button class="accordion-header">💰 Payment Options</button>
       <div class="accordion-content">
         <p>You can pay using any of the following methods:</p>
+        <input type="number" id="amt" placeholder="Enter Amount">
+        <button onclick="payNow()">Pay Now</button>
         <div class="payment-box">
           <ul>
             <li><b>UPI ID:</b> mondalbrothers@upi</li>
