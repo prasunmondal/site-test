@@ -55,3 +55,47 @@ function payNow() {
 
 
 
+// PWA - start
+
+
+
+let deferredPrompt;
+const installBtn = document.getElementById("installBtn");
+const toast = document.getElementById("toast");
+
+installBtn.style.display = "none";
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.style.display = "block";
+});
+
+installBtn.addEventListener("click", async () => {
+  installBtn.style.display = "none";
+  deferredPrompt.prompt();
+  const result = await deferredPrompt.userChoice;
+  deferredPrompt = null;
+});
+
+// When installed
+window.addEventListener("appinstalled", () => {
+  showToast("App installed successfully! 🎉 Open from your Home screen!");
+});
+
+// Toast function
+function showToast(message) {
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 3500);
+}
+
+
+// PWA - end
+
+
+
+

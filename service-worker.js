@@ -4,7 +4,7 @@ const urlsToCache = [
   "./index.html",
   "./style.css",
   "./script.js",
-  "./images/payment-qr.png",
+  "./images/payment-qr.jpeg",
   "./images/icon-192.png",
   "./images/icon-512.png"
 ];
@@ -14,6 +14,7 @@ self.addEventListener("install", event => {
     caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
   );
 });
+
 
 self.addEventListener("fetch", event => {
   event.respondWith(
