@@ -1,7 +1,7 @@
 {
   "name": "Mondal Brothers Poultry",
   "short_name": "MB Poultry",
-  "start_url": "/",
+  "start_url": ".",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#f8b400",
