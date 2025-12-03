@@ -80,7 +80,7 @@ installBtn.addEventListener("click", async () => {
 
 // When installed
 window.addEventListener("appinstalled", () => {
-  showToast("App installed successfully! 🎉 Open from your Home screen!");
+  showToast("Installing App...");
 });
 
 // Toast function
