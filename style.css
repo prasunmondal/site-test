@@ -668,7 +668,7 @@ footer span {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 20px;
+  padding-top: 0px;
   padding-bottom: 10px;
 }
 
