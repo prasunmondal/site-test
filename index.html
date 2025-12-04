@@ -68,17 +68,22 @@
             <div class="section-box">
                 <h3 class="section-title">📲 UPI Payment</h3>
 
-                <div class="payment-container">
+                <div class="payment-container vertical">
 
                     <!-- QR AREA -->
-                    <div class="qr-area">
+                    <div class="qr-area center">
                         <p><b>Scan & Pay</b></p>
                         <img src="images/payment-qr.jpeg" alt="Payment QR" class="qr-code" />
+
+                        <div class="amount-box">
+                            <input type="number" id="amt" placeholder="Enter Amount" />
+                            <button onclick="payNow()" class="pay-btn">Pay Now</button>
+                        </div>
 
                         <button class="upi-btn" onclick="openUPILink()">Pay via UPI App</button>
                     </div>
 
-                    <!-- UPI DETAILS -->
+                    <!-- UPI DETAILS BELOW QR -->
                     <div class="details-area">
                         <ul class="payment-list">
                             <li>
@@ -99,6 +104,7 @@
 
                 </div>
             </div>
+
 
             <!-- ================= BANK TRANSFER SECTION ================= -->
             <div class="section-box">
