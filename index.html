@@ -20,6 +20,9 @@
 </head>
 <body>
 
+  <div id="copyToast" class="toast">Copied!</div>
+
+
   <header class="hero">
     <h1>Mondal Brothers Poultry</h1>
     <p>Exclusive for Shops | Premium Quality | Modern Accounting with Daily SMS</p>
@@ -42,7 +45,7 @@
                 <!-- Line 2: Pieces or KG -->
                 <div class="qty-row">
                     <input type="number" id="kg" placeholder="Kg" />
-                    <span class="or-text"> - OR - </span>
+                    <span class="or-text"> OR </span>
                     <input type="number" id="pieces" placeholder="Pieces" />
                 </div>
 
@@ -83,19 +86,19 @@
 
                             <li class="upi-details-row">
                                 <span class="label">UPI Number:</span>
-                                <span id="upiNumber" class="value">9679004046</span>
+                                <span id="upiNumber" class="value copyable">9679004046</span>
                                 <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('upiNumber')"></i>
                             </li>
 
                             <li class="upi-details-row">
                                 <span class="label">UPI ID:</span>
-                                <span id="upiID" class="value">prsnmondal@ybl</span>
+                                <span id="upiID" class="value copyable">prsnmondal@ybl</span>
                                 <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('upiID')"></i>
                             </li>
 
                             <li class="upi-details-row">
                                 <span class="label">UPI ID:</span>
-                                <span id="altUPIID" class="value" onclick="copyToClipboard('altUPIID')">mondalbrothers@upi</span>
+                                <span id="altUPIID" class="value copyable">mondalbrothers@upi</span>
                                 <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('altUPIID')"></i>
                             </li>
 
@@ -127,25 +130,25 @@
 
                     <li class="bank-row">
                         <span class="label">Account Holder:</span>
-                        <span id="accHolder" class="value">Mondal Brothers</span>
+                        <span id="accHolder" class="value copyable">Mondal Brothers</span>
                         <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('accHolder')"></i>
                     </li>
 
                     <li class="bank-row">
                         <span class="label">Bank Name:</span>
-                        <span id="bankName" class="value">Canara Bank</span>
+                        <span id="bankName" class="value copyable">Canara Bank</span>
                         <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('bankName')"></i>
                     </li>
 
                     <li class="bank-row">
                         <span class="label">Account Number:</span>
-                        <span id="accNo" class="value">4400201000088</span>
+                        <span id="accNo" class="value copyable">4400201000088</span>
                         <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('accNo')"></i>
                     </li>
 
                     <li class="bank-row">
                         <span class="label">IFSC Code:</span>
-                        <span id="ifsc" class="value">CNRB0000000</span>
+                        <span id="ifsc" class="value copyable">CNRB0000000</span>
                         <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('ifsc')"></i>
                     </li>
 

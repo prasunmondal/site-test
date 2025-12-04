@@ -201,14 +201,22 @@ form button:hover { background: #f7c948; }
   font-size: 15px;
 }
 
+ul {
+  padding-left: 0;
+  margin-left: 0;
+}
 
 .bank-row {
   list-style: none;
   align-items: center;
   margin-bottom: 6px;
+  padding-left: 0;
+  margin-left: 0;
 }
 .bank-row .label {
   font-weight: normal;
+  padding-left: 0;
+    margin-left: 0;
   width: 120px;
   font-size: 14px;   /* Reduced from default */
 }
@@ -407,3 +415,30 @@ footer span {
   font-size: 14px;   /* Reduced size */
 }
 
+.copyable {
+  cursor: pointer;
+  color: #333;
+}
+.copyable:hover {
+  color: #f8b400; /* highlight effect */
+}
+
+.toast {
+  visibility: hidden;
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.85); /* darker background */
+  color: #fff;                    /* white readable text */
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 15px;
+  opacity: 0;
+  transition: opacity 0.4s ease, visibility 0.4s;
+  z-index: 9999;
+}
+.toast.show {
+  visibility: visible;
+  opacity: 1;
+}

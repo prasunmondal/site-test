@@ -35,8 +35,27 @@ document.getElementById("orderForm").addEventListener("submit", (e) => {
 function copyToClipboard(elementId) {
   const text = document.getElementById(elementId).innerText;
   navigator.clipboard.writeText(text)
-    .then(() => alert("Copied: " + text));
+    .then(() => alert("Copied: "));
 }
+
+function showToast() {
+  const toast = document.getElementById("copyToast");
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 1500); // hide after 1.5 seconds
+}
+
+document.querySelectorAll(".copyable").forEach(item => {
+  item.addEventListener("click", () => {
+    const text = item.textContent.trim();
+    navigator.clipboard.writeText(text).then(() => {
+      showToast();
+    });
+  });
+});
+
 
 // Auto-generate UPI deep link from entered amount
 function openUPILink() {
