@@ -186,7 +186,7 @@ form button:hover { background: #f7c948; }
 .bank-section { margin-top: 10px; }
 
 .upi-details-row {
-  display: flex;
+  list-style: none;
   align-items: center;
   margin-bottom: 6px;
 }
@@ -203,7 +203,7 @@ form button:hover { background: #f7c948; }
 
 
 .bank-row {
-  display: flex;
+  list-style: none;
   align-items: center;
   margin-bottom: 6px;
 }

@@ -40,13 +40,21 @@ function copyToClipboard(elementId) {
 
 // Auto-generate UPI deep link from entered amount
 function openUPILink() {
-  const amount = document.getElementById("amt").value || "0";
+  const amountField = document.getElementById("amt");
+  const amount = amountField.value.trim();
   const upiId = "prsnmondal@ybl";
-  const name = "Mondal%20Brothers";
+  const name = encodeURIComponent("Prasun Mondal");
+  const note = encodeURIComponent("Payment - Mondal Brothers");
 
-  const url = `upi://pay?pa=${upiId}&pn=${name}&am=${amount}&cu=INR`;
+  // If no amount, create URL without am parameter
+  let url = `upi://pay?pa=${upiId}&pn=${name}&cu=INR&tn=${note}`;
 
-  window.location.href = url; // Opens supported UPI apps
+  // If valid amount added, include am parameter
+  if (amount && !isNaN(amount) && Number(amount) > 0) {
+    url += `&am=${amount}`;
+  }
+
+  window.location.href = url;
 }
 
 function payNow() {
