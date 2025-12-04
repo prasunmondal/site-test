@@ -84,39 +84,50 @@
                     <div class="details-area">
                         <ul class="payment-list">
 
+                            <!-- Primary UPI Section -->
+                            <li class="details-title">Primary UPI</li>
+
+                            <li class="upi-details-row lowlight">
+                                <span class="label">Name</span>
+                                <span class="value copyable">Prasun Mondal</span>
+                            </li>
+
                             <li class="upi-details-row">
-                                <span class="label">UPI Number:</span>
+                                <span class="label">Number</span>
                                 <span id="upiNumber" class="value copyable">9679004046</span>
                                 <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('upiNumber')"></i>
                             </li>
 
                             <li class="upi-details-row">
-                                <span class="label">UPI ID:</span>
+                                <span class="label">UPI ID</span>
                                 <span id="upiID" class="value copyable">prsnmondal@ybl</span>
                                 <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('upiID')"></i>
                             </li>
 
+                            <!-- Divider -->
+                            <p></p>
+                            <br></br>
+<!--                            <li class="divider"></li>-->
+<!--                            <p></p>-->
+<!--                            <p></p>-->
+
+                            <!-- Alternate UPI Section -->
+                            <li class="details-title">Alternate UPI</li>
+
+                            <li class="upi-details-row lowlight">
+                                <span class="label">Name</span>
+                                <span class="value copyable">Mondal Brothers</span>
+                            </li>
+
                             <li class="upi-details-row">
-                                <span class="label">UPI ID:</span>
+                                <span class="label">UPI ID</span>
                                 <span id="altUPIID" class="value copyable">mondalbrothers@upi</span>
                                 <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('altUPIID')"></i>
                             </li>
 
-<!--                            <li>-->
-<!--                                <i></i> <span id=""></span>-->
-<!--                                <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('upiNumber')"></i>-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                                <i>UPI ID:</i> <span id="upiID"></span>-->
-<!--                                <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('upiID')"></i>-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                                <i>Alternate UPI ID:</i> <span id=""></span>-->
-<!--                                <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('altUPIID')"></i>-->
-<!--                            </li>-->
-<!--                            <li><b>PhonePe / GPay / Paytm</b> accepted</li>-->
                         </ul>
                     </div>
+
 
                 </div>
             </div>
@@ -128,16 +139,20 @@
 
                 <ul class="payment-list">
 
+                    <li class="bank-row lowlight">
+                        <span class="label">Bank Name:</span>
+                        <span id="bankName" class="value copyable">Canara Bank</span>
+                    </li>
+
+                    <li class="bank-row lowlight">
+                        <span class="label">Account Type:</span>
+                        <span class="value copyable">Current Account</span>
+                    </li>
+
                     <li class="bank-row">
                         <span class="label">Account Holder:</span>
                         <span id="accHolder" class="value copyable">Mondal Brothers</span>
                         <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('accHolder')"></i>
-                    </li>
-
-                    <li class="bank-row">
-                        <span class="label">Bank Name:</span>
-                        <span id="bankName" class="value copyable">Canara Bank</span>
-                        <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('bankName')"></i>
                     </li>
 
                     <li class="bank-row">
@@ -150,11 +165,6 @@
                         <span class="label">IFSC Code:</span>
                         <span id="ifsc" class="value copyable">CNRB0000000</span>
                         <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('ifsc')"></i>
-                    </li>
-
-                    <li class="bank-row">
-                        <span class="label">Account Type:</span>
-                        <span class="value">Current Account</span>
                     </li>
 
                 </ul>

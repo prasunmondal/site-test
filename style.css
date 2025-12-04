@@ -198,7 +198,7 @@ form button:hover { background: #f7c948; }
 
 .upi-details-row .value {
   margin-left: 2px;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 ul {
@@ -223,8 +223,9 @@ ul {
 
 .bank-row .value {
   margin-left: 2px;
-  font-size: 15px;
+  font-size: 14px;
 }
+
 
 .section-box {
   background: #ffffff;
@@ -444,4 +445,149 @@ footer span {
 .toast.show {
   visibility: visible;
   opacity: 1;
+}
+
+.low-visibility {
+    color: #999
+}
+
+.payment-list {
+  padding-left: 0;
+  margin: 0;
+}
+
+.upi-details-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;               /* space between elements */
+  padding: 6px 0;
+  list-style: none;
+}
+
+.upi-details-row .label {
+  width: 90px;             /* fixed label width for alignment */
+  color: #777;
+}
+
+.upi-details-row .value {
+  flex: 1;                 /* take remaining space */
+  text-align: left;
+  color: #333;
+  font-weight: 600;
+  overflow-wrap: anywhere; /* if email is long, break nicely */
+}
+
+.copy-icon {
+  flex-shrink: 0;          /* prevents icon from squeezing text */
+  font-size: 14px;
+  cursor: pointer;
+  color: #999;
+}
+
+
+.details-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  padding-top: 10px;
+  padding-bottom: 2px;
+  list-style: none;
+}
+
+.divider {
+  height: 1px;
+  background: #eee;
+  list-style: none;
+  margin: 8px 0;
+}
+
+.label {
+  color: #777;
+  width: 95px;
+}
+
+.value {
+  color: #333;
+  font-weight: 500;
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+.copyable {
+  user-select: none;
+  cursor: pointer;
+}
+
+.value.copied {
+  background: #f7f7f7;
+  transition: background 0.3s;
+}
+
+.bank-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 6px 0;
+  list-style: none;
+  font-size: 14px;
+}
+
+.bank-row .label {
+  width: 120px;     /* Customize width to align items */
+  color: #777;
+}
+
+.bank-row .value {
+  flex: 1;
+  text-align: left;
+  color: #333;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.bank-row.lowlight .label {
+  color: #aaa;
+}
+
+.bank-row.lowlight .value {
+  color: #bbb;
+}
+
+.bank-row .copy-icon {
+  flex-shrink: 0;
+  font-size: 14px;
+  color: #999;
+  cursor: pointer;
+}
+
+
+.lowlight {
+  color: #888; /* light grey text */
+}
+
+.lowlight .label {
+  color: #aaa; /* lighter label also */
+}
+
+
+.lowlight .value {
+  color: #bbb; /* slightly stronger but still lowlight */
+}
+
+.lowlight .value {
+  color: #777; /* slightly stronger but still lowlight */
+}
+
+.lowlight .copy-icon {
+  color: #aaa; /* softer icon */
+}
+
+.bank-row:not(:last-child) {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.upi-details-row:not(:last-child) {
+  border-bottom: 1px solid #f0f0f0;
 }

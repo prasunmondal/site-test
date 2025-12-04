@@ -34,8 +34,9 @@ document.getElementById("orderForm").addEventListener("submit", (e) => {
 
 function copyToClipboard(elementId) {
   const text = document.getElementById(elementId).innerText;
-  navigator.clipboard.writeText(text)
-    .then(() => alert("Copied: "));
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(`Copied: ${text}`);
+        });
 }
 
 function showToast(message) {
