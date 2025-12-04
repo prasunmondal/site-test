@@ -59,11 +59,6 @@
 
             <p class="title-text">Choose any payment method below</p>
 
-            <div class="amount-box">
-                <input type="number" id="amt" placeholder="Enter Amount" />
-                <button onclick="payNow()" class="pay-btn">Pay Now</button>
-            </div>
-
             <!-- ================= UPI PAYMENT SECTION ================= -->
             <div class="section-box">
                 <h3 class="section-title">📲 UPI Payment</h3>
@@ -76,8 +71,7 @@
                         <img src="images/payment-qr.jpeg" alt="Payment QR" class="qr-code" />
 
                         <div class="amount-box">
-                            <input type="number" id="amt" placeholder="Enter Amount" />
-                            <button onclick="payNow()" class="pay-btn">Pay Now</button>
+                            <input type="number" id="amt" placeholder="Enter Amount (Optional)" />
                         </div>
 
                         <button class="upi-btn" onclick="openUPILink()">Pay via UPI App</button>
