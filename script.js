@@ -38,20 +38,25 @@ function copyToClipboard(elementId) {
     .then(() => alert("Copied: "));
 }
 
-function showToast() {
+function showToast(message) {
   const toast = document.getElementById("copyToast");
+  toast.innerText = message;  // Use innerText to avoid issues
   toast.classList.add("show");
 
   setTimeout(() => {
     toast.classList.remove("show");
-  }, 1500); // hide after 1.5 seconds
+  }, 1500);
 }
 
-document.querySelectorAll(".copyable").forEach(item => {
-  item.addEventListener("click", () => {
-    const text = item.textContent.trim();
-    navigator.clipboard.writeText(text).then(() => {
-      showToast();
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  document.querySelectorAll(".copyable").forEach(item => {
+    item.addEventListener("click", () => {
+      const text = item.textContent.trim();
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(`Copied: ${text}`);
+      });
     });
   });
 });

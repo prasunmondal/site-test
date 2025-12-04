@@ -418,6 +418,9 @@ footer span {
 .copyable {
   cursor: pointer;
   color: #333;
+  user-select: none;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none;     /* IE/Edge */
 }
 .copyable:hover {
   color: #f8b400; /* highlight effect */
@@ -433,7 +436,7 @@ footer span {
   color: #fff;                    /* white readable text */
   padding: 10px 18px;
   border-radius: 8px;
-  font-size: 15px;
+  font-size: 12px;
   opacity: 0;
   transition: opacity 0.4s ease, visibility 0.4s;
   z-index: 9999;
