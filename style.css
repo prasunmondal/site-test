@@ -591,3 +591,88 @@ footer span {
 .upi-details-row:not(:last-child) {
   border-bottom: 1px solid #f0f0f0;
 }
+
+/* Background Gradient */
+.hero {
+  background: linear-gradient(180deg, #F5B041 0%, #D68910 100%);
+  text-align: center;
+  padding: 40px 20px;
+  color: #fff;
+}
+
+/* Headline */
+.hero h1 {
+  font-size: 32px;
+  font-weight: 800;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Subtitle */
+.hero p {
+  font-size: 18px;
+  margin-top: 10px;
+  color: #fff;
+}
+
+/* Primary CTA – Call Now */
+.call-btn {
+  background: #0066FF;
+  color: white;
+  padding: 14px 30px;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 40px;
+  display: inline-block;
+  margin-top: 20px;
+  box-shadow: 0 6px 12px rgba(0, 102, 255, 0.35);
+}
+
+/* Secondary CTA – Register */
+.register-btn {
+  background: #1ABC9C;
+  color: #fff;
+  padding: 14px 30px;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 40px;
+  display: inline-block;
+  margin-top: 12px;
+  box-shadow: 0 6px 12px rgba(26, 188, 156, 0.35);
+}
+
+/* Menu Buttons below */
+.menu-btn {
+  background: #ffffff;
+  color: #D68910;
+  border: 2px solid #F5B041;
+  padding: 14px;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 16px;
+  width: 100%;
+  margin-top: 14px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Footer */
+.footer {
+  background: #222;
+  color: #fff;
+  text-align: center;
+  padding: 18px;
+  font-size: 15px;
+}
+
+.logo-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+.logo {
+  width: 140px;    /* adjust size */
+  height: auto;
+}
