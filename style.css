@@ -150,7 +150,7 @@ form button:hover { background: #f7c948; }
   gap: 25px;
   margin-top: 20px;
 }
-.qr-area, .details-area { width: 50%; }
+.qr-area, .details-area { width: 100%; }
 .qr-area { text-align: center;}
 .details-area { padding-left: 10px; }
 
@@ -177,19 +177,38 @@ form button:hover { background: #f7c948; }
 .copy-icon {
   cursor: pointer;
   font-size: 16px;
-  margin-left: 6px;
-  color: #444;
+  margin-left: 10px;
+  color: #000000;
 }
 .copy-icon:hover { color: #007bff; }
 
 /* Bank Details Row Format */
 .bank-section { margin-top: 10px; }
+
+.upi-details-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.upi-details-row .label {
+  font-weight: normal;
+  width: 100px;
+  font-size: 14px;   /* Reduced from default */
+}
+
+.upi-details-row .value {
+  margin-left: 2px;
+  font-size: 15px;
+}
+
+
 .bank-row {
   display: flex;
   align-items: center;
   margin-bottom: 6px;
 }
 .bank-row .label {
+  font-weight: normal;
   width: 120px;
   font-size: 14px;   /* Reduced from default */
 }
@@ -363,3 +382,28 @@ footer span {
   gap: 10px;
   justify-content: center;
 }
+
+.payment-list li {
+    margin: 6px 0;
+    font-size: 16px;
+}
+
+.payment-list li {
+    font-style: normal;
+    color: #555;                 /* Lighter label color */
+    font-weight: 400;
+    margin-right: 8px;
+}
+
+.payment-list li span {
+    font-weight: 700;            /* Bold the values */
+    font-size: 17px;
+    color: #333;                 /* Make values stand out */
+}
+
+.copy-icon {
+  cursor: pointer;
+  color: #999;
+  font-size: 14px;   /* Reduced size */
+}
+
