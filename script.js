@@ -34,52 +34,19 @@ document.getElementById("orderForm").addEventListener("submit", (e) => {
 
 function copyToClipboard(elementId) {
   const text = document.getElementById(elementId).innerText;
-        navigator.clipboard.writeText(text).then(() => {
-          showToast(`Copied: ${text}`);
-        });
+  navigator.clipboard.writeText(text)
+    .then(() => alert("Copied: " + text));
 }
-
-function showToast(message) {
-  const toast = document.getElementById("copyToast");
-  toast.innerText = message;  // Use innerText to avoid issues
-  toast.classList.add("show");
-
-  setTimeout(() => {
-    toast.classList.remove("show");
-  }, 1500);
-}
-
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  document.querySelectorAll(".copyable").forEach(item => {
-    item.addEventListener("click", () => {
-      const text = item.textContent.trim();
-      navigator.clipboard.writeText(text).then(() => {
-        showToast(`Copied: ${text}`);
-      });
-    });
-  });
-});
-
 
 // Auto-generate UPI deep link from entered amount
 function openUPILink() {
-  const amountField = document.getElementById("amt");
-  const amount = amountField.value.trim();
+  const amount = document.getElementById("amt").value || "0";
   const upiId = "prsnmondal@ybl";
-  const name = encodeURIComponent("Prasun Mondal");
-  const note = encodeURIComponent("Payment - Mondal Brothers");
+  const name = "Mondal%20Brothers";
 
-  // If no amount, create URL without am parameter
-  let url = `upi://pay?pa=${upiId}&pn=${name}&cu=INR&tn=${note}`;
+  const url = `upi://pay?pa=${upiId}&pn=${name}&am=${amount}&cu=INR`;
 
-  // If valid amount added, include am parameter
-  if (amount && !isNaN(amount) && Number(amount) > 0) {
-    url += `&am=${amount}`;
-  }
-
-  window.location.href = url;
+  window.location.href = url; // Opens supported UPI apps
 }
 
 function payNow() {
@@ -113,7 +80,7 @@ installBtn.addEventListener("click", async () => {
 
 // When installed
 window.addEventListener("appinstalled", () => {
-  showToast("Installing App...");
+  showToast("App installed successfully! 🎉 Open from your Home screen!");
 });
 
 // Toast function

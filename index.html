@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mondal Brothers Poultry</title>
+<!--  <title>Mondal Brothers Poultry</title>-->
   <link rel="stylesheet" href="style.css" />
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#f8b400">
@@ -20,13 +20,7 @@
 </head>
 <body>
 
-  <span id="copyToast" class="toast">Copied!</span>
-
-
   <header class="hero">
-      <div class="logo-container">
-          <img src="images/mb-icon.png" alt="Mondal Brothers Poultry Logo" class="logo">
-      </div>
     <h1>Mondal Brothers Poultry</h1>
     <p>Exclusive for Shops | Premium Quality | Modern Accounting with Daily SMS</p>
     <a href="tel:+919679004046" class="btn-call-rounded">📞 Call Now</a>
@@ -48,7 +42,7 @@
                 <!-- Line 2: Pieces or KG -->
                 <div class="qty-row">
                     <input type="number" id="kg" placeholder="Kg" />
-                    <span class="or-text"> OR </span>
+                    <span class="or-text"> - OR - </span>
                     <input type="number" id="pieces" placeholder="Pieces" />
                 </div>
 
@@ -65,76 +59,46 @@
 
             <p class="title-text">Choose any payment method below</p>
 
+            <div class="amount-box">
+                <input type="number" id="amt" placeholder="Enter Amount" />
+                <button onclick="payNow()" class="pay-btn">Pay Now</button>
+            </div>
+
             <!-- ================= UPI PAYMENT SECTION ================= -->
             <div class="section-box">
                 <h3 class="section-title">📲 UPI Payment</h3>
 
-                <div class="payment-container vertical">
+                <div class="payment-container">
 
                     <!-- QR AREA -->
-                    <div class="qr-area center">
+                    <div class="qr-area">
                         <p><b>Scan & Pay</b></p>
                         <img src="images/payment-qr.jpeg" alt="Payment QR" class="qr-code" />
-
-                        <div class="amount-box">
-                            <input type="number" id="amt" placeholder="Enter Amount (Optional)" />
-                        </div>
 
                         <button class="upi-btn" onclick="openUPILink()">Pay via UPI App</button>
                     </div>
 
-                    <!-- UPI DETAILS BELOW QR -->
+                    <!-- UPI DETAILS -->
                     <div class="details-area">
                         <ul class="payment-list">
-
-                            <!-- Primary UPI Section -->
-                            <li class="details-title">Primary UPI</li>
-
-                            <li class="upi-details-row lowlight">
-                                <span class="label">Name</span>
-                                <span class="value copyable">Prasun Mondal</span>
-                            </li>
-
-                            <li class="upi-details-row">
-                                <span class="label">Number</span>
-                                <span id="upiNumber" class="value copyable">9679004046</span>
+                            <li>
+                                <b>UPI Number:</b> <span id="upiNumber">9679004046</span>
                                 <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('upiNumber')"></i>
                             </li>
-
-                            <li class="upi-details-row">
-                                <span class="label">UPI ID</span>
-                                <span id="upiID" class="value copyable">prsnmondal@ybl</span>
+                            <li>
+                                <b>UPI ID:</b> <span id="upiID">prsnmondal@ybl</span>
                                 <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('upiID')"></i>
                             </li>
-
-                            <!-- Divider -->
-                            <p></p>
-                            <br></br>
-<!--                            <li class="divider"></li>-->
-<!--                            <p></p>-->
-<!--                            <p></p>-->
-
-                            <!-- Alternate UPI Section -->
-                            <li class="details-title">Alternate UPI</li>
-
-                            <li class="upi-details-row lowlight">
-                                <span class="label">Name</span>
-                                <span class="value copyable">Mondal Brothers</span>
-                            </li>
-
-                            <li class="upi-details-row">
-                                <span class="label">UPI ID</span>
-                                <span id="altUPIID" class="value copyable">mondalbrothers@upi</span>
+                            <li>
+                                <b>Alternate UPI ID:</b> <span id="altUPIID">mondalbrothers@upi</span>
                                 <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('altUPIID')"></i>
                             </li>
-
+                            <li><b>PhonePe / GPay / Paytm</b> accepted</li>
                         </ul>
                     </div>
 
-
                 </div>
             </div>
-
 
             <!-- ================= BANK TRANSFER SECTION ================= -->
             <div class="section-box">
@@ -142,32 +106,33 @@
 
                 <ul class="payment-list">
 
-                    <li class="bank-row lowlight">
+                    <li class="bank-row">
                         <span class="label">Bank Name:</span>
-                        <span id="bankName" class="value copyable">Canara Bank</span>
-                    </li>
-
-                    <li class="bank-row lowlight">
-                        <span class="label">Account Type:</span>
-                        <span class="value copyable">Current Account</span>
+                        <span id="bankName" class="value">Canara Bank</span>
+                        <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('bankName')"></i>
                     </li>
 
                     <li class="bank-row">
-                        <span class="label">Account Holder:</span>
-                        <span id="accHolder" class="value copyable">Mondal Brothers</span>
+                        <span class="label">Acc Name:</span>
+                        <span id="accHolder" class="value">Mondal Brothers</span>
                         <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('accHolder')"></i>
                     </li>
 
                     <li class="bank-row">
-                        <span class="label">Account Number:</span>
-                        <span id="accNo" class="value copyable">4400201000088</span>
+                        <span class="label">Acc Number:</span>
+                        <span id="accNo" class="value">4400201000088</span>
                         <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('accNo')"></i>
                     </li>
 
                     <li class="bank-row">
                         <span class="label">IFSC Code:</span>
-                        <span id="ifsc" class="value copyable">CNRB0000000</span>
+                        <span id="ifsc" class="value">CNRB0000000</span>
                         <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('ifsc')"></i>
+                    </li>
+
+                    <li class="bank-row">
+                        <span class="label">Account Type:</span>
+                        <span class="value">Current Account</span>
                     </li>
 
                 </ul>
