@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<!--  <title>Mondal Brothers Poultry</title>-->
+  <title>Mondal Brothers Poultry</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#f8b400">
@@ -17,11 +17,22 @@
       window.location.href = upi;
     }
   </script>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <body>
 
+  <span id="copyToast" class="toast">Copied!</span>
+
+
   <header class="hero">
-    <h1>Mondal Brothers Poultry</h1>
+      <div class="logo-container">
+          <img src="images/mb-icon.png" alt="Mondal Brothers Poultry Logo" class="logo">
+      </div>
+    <h2>Mondal Brothers Poultry</h2>
     <p>Exclusive for Shops | Premium Quality | Modern Accounting with Daily SMS</p>
     <a href="tel:+919679004046" class="btn-call-rounded">📞 Call Now</a>
       <br/>
@@ -31,132 +42,174 @@
   </header>
 
   <main>
-    <section class="accordion">
-        <button class="accordion-header">🧾 Quick Order Form</button>
-        <div class="accordion-content">
-            <form id="orderForm">
+      <section class="accordion">
 
-                <!-- Line 1: Name -->
-                <input type="text" id="name" placeholder="Your Name" required />
+          <!-- ================= PRE-BOOK ================= -->
+          <button class="accordion-header">🎉 Occasion Pre-Booking</button>
+          <div class="accordion-content">
+              <div class="card">
 
-                <!-- Line 2: Pieces or KG -->
-                <div class="qty-row">
-                    <input type="number" id="kg" placeholder="Kg" />
-                    <span class="or-text"> - OR - </span>
-                    <input type="number" id="pieces" placeholder="Pieces" />
-                </div>
+                  <h3 class="section-title">📆 Pre-Register Upcoming Orders</h3>
+                  <p class="small-info">
+                      Add your occasion in advance — never forget later.
+                  </p>
 
-                <button type="submit">Send Order via WhatsApp</button>
-            </form>
-        </div>
+                  <form id="occasionForm" class="prebook-form">
 
+                      <input type="text" id="occName" placeholder="Your Name" required />
+                      <input type="text" id="occTitle" placeholder="Occasion Name"/>
+                      <input type="date" id="occDate" required />
+                      <input type="number" id="occQty" placeholder="Approx Quantity (Kg)" />
 
-        <!-- FontAwesome Icons -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+                      <button type="button" class="primary-btn" onclick="sendOccasionBooking()">
+                          📲 Submit Pre-Booking via WhatsApp
+                      </button>
 
-        <button class="accordion-header">💰 Payment Options</button>
-        <div class="accordion-content">
+                  </form>
+              </div>
+          </div>
 
-            <p class="title-text">Choose any payment method below</p>
+          <!-- ================= PAYMENT SECTION ================= -->
+          <button class="accordion-header">💰 Payment Options</button>
+          <div class="accordion-content">
+              <p class="title-text">Choose any payment method below</p>
 
-            <div class="amount-box">
-                <input type="number" id="amt" placeholder="Enter Amount" />
-                <button onclick="payNow()" class="pay-btn">Pay Now</button>
-            </div>
+              <!-- UPI CARD -->
+              <div class="card">
+                  <h3 class="section-title">📲 UPI Payment</h3>
 
-            <!-- ================= UPI PAYMENT SECTION ================= -->
-            <div class="section-box">
-                <h3 class="section-title">📲 UPI Payment</h3>
+                  <div class="qr-wrapper">
+                      <p class="text-center bold">Scan & Pay</p>
+                      <img src="images/payment-qr.jpeg" alt="Payment QR" class="qr-code" />
 
-                <div class="payment-container">
+                      <input type="number" id="amt" class="amount-input" placeholder="Enter Amount (Optional)" />
+                      <button class="primary-btn" onclick="openUPILink()">Pay via UPI App</button>
+                  </div>
 
-                    <!-- QR AREA -->
-                    <div class="qr-area">
-                        <p><b>Scan & Pay</b></p>
-                        <img src="images/payment-qr.jpeg" alt="Payment QR" class="qr-code" />
+                  <ul class="details-list">
 
-                        <button class="upi-btn" onclick="openUPILink()">Pay via UPI App</button>
-                    </div>
+                      <li class="details-label">Primary UPI</li>
 
-                    <!-- UPI DETAILS -->
-                    <div class="details-area">
-                        <ul class="payment-list">
-                            <li>
-                                <b>UPI Number:</b> <span id="upiNumber">9679004046</span>
-                                <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('upiNumber')"></i>
-                            </li>
-                            <li>
-                                <b>UPI ID:</b> <span id="upiID">prsnmondal@ybl</span>
-                                <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('upiID')"></i>
-                            </li>
-                            <li>
-                                <b>Alternate UPI ID:</b> <span id="altUPIID">mondalbrothers@upi</span>
-                                <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('altUPIID')"></i>
-                            </li>
-                            <li><b>PhonePe / GPay / Paytm</b> accepted</li>
-                        </ul>
-                    </div>
+                      <li class="details-row lowlight">
+                          <span class="label">Name</span>
+                          <span class="value">Prasun Mondal</span>
+                          <i class="copy-icon"></i>
+                      </li>
 
-                </div>
-            </div>
+                      <li class="details-row">
+                          <span class="label">Number</span>
+                          <span id="upiNumber" class="value copyable">9679004046</span>
+                          <i class="fa-solid fa-copy copy-icon" onclick="copyToClipboard('upiNumber')"></i>
+                      </li>
 
-            <!-- ================= BANK TRANSFER SECTION ================= -->
-            <div class="section-box">
-                <h3 class="section-title">🏦 Bank Transfer Details</h3>
+                      <li class="details-row">
+                          <span class="label">UPI ID</span>
+                          <span id="upiID" class="value copyable">prsnmondal@ybl</span>
+                          <i class="fa-solid fa-copy copy-icon" onclick="copyToClipboard('upiID')"></i>
+                      </li>
 
-                <ul class="payment-list">
+                      <li class="details-label">Alternate UPI</li>
 
-                    <li class="bank-row">
-                        <span class="label">Bank Name:</span>
-                        <span id="bankName" class="value">Canara Bank</span>
-                        <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('bankName')"></i>
-                    </li>
+                      <li class="details-row lowlight">
+                          <span class="label">Name</span>
+                          <span class="value">Mondal Brothers</span>
+                          <i class="copy-icon"></i>
+                      </li>
 
-                    <li class="bank-row">
-                        <span class="label">Acc Name:</span>
-                        <span id="accHolder" class="value">Mondal Brothers</span>
-                        <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('accHolder')"></i>
-                    </li>
+                      <li class="details-row">
+                          <span class="label">UPI ID</span>
+                          <span id="altUPIID" class="value copyable">mondalbrothers@upi</span>
+                          <i class="fa-solid fa-copy copy-icon" onclick="copyToClipboard('altUPIID')"></i>
+                      </li>
 
-                    <li class="bank-row">
-                        <span class="label">Acc Number:</span>
-                        <span id="accNo" class="value">4400201000088</span>
-                        <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('accNo')"></i>
-                    </li>
-
-                    <li class="bank-row">
-                        <span class="label">IFSC Code:</span>
-                        <span id="ifsc" class="value">CNRB0000000</span>
-                        <i class="fa-regular fa-copy copy-icon" onclick="copyToClipboard('ifsc')"></i>
-                    </li>
-
-                    <li class="bank-row">
-                        <span class="label">Account Type:</span>
-                        <span class="value">Current Account</span>
-                    </li>
-
-                </ul>
-            </div>
-
-        </div>
-
-
-              <button class="accordion-header">📞 Contact Details</button>
-              <div class="accordion-content">
-                  <p>Pranab Mondal</p>
-                  <p><a href="tel:+919679004046">📞 9679 004 046</a></p>
-<!--                <a href="tel:+919679004046" class="call-btn">📞 Call Now</a>-->
+                  </ul>
               </div>
 
-        <!--      <button class="accordion-header">📍 Location</button>-->
-<!--      <div class="accordion-content">-->
-<!--        <iframe-->
-<!--          src="https://www.google.com/maps/embed?pb=!1m18!..."-->
-<!--          width="100%" height="250" style="border:0;" allowfullscreen="">-->
-<!--        </iframe>-->
-<!--      </div>-->
-    </section>
+
+              <!-- BANK CARD -->
+              <div class="card">
+                  <h3 class="section-title">🏦 Bank Transfer Details</h3>
+                  <ul class="details-list">
+
+                      <li class="details-row lowlight">
+                          <span class="label">Bank Name</span>
+                          <span id="bankName" class="value">Canara Bank</span>
+                          <i class="copy-icon"></i>
+                      </li>
+
+                      <li class="details-row lowlight">
+                          <span class="label">Acc. Type</span>
+                          <span class="value">Current Account</span>
+                          <i class="copy-icon"></i>
+                      </li>
+
+                      <li class="details-row">
+                          <span class="label">Acc. Name</span>
+                          <span id="accHolder" class="value copyable">Mondal Brothers</span>
+                          <i class="fa-solid fa-copy copy-icon" onclick="copyToClipboard('accHolder')"></i>
+                      </li>
+
+                      <li class="details-row">
+                          <span class="label">Acc. Number</span>
+                          <span id="accNo" class="value copyable">4400201000088</span>
+                          <i class="fa-solid fa-copy copy-icon" onclick="copyToClipboard('accNo')"></i>
+                      </li>
+
+                      <li class="details-row">
+                          <span class="label">IFSC Code</span>
+                          <span id="ifsc" class="value copyable">CNRB0000000</span>
+                          <i class="fa-solid fa-copy copy-icon" onclick="copyToClipboard('ifsc')"></i>
+                      </li>
+
+                  </ul>
+              </div>
+          </div>
+
+          <!-- ================= RETAIL-CALCULATOR ================= -->
+          <a class="accordion-header" href="retail-calculator/retail-calculator.html">🎉 Retail Calculator</a>
+
+          <!-- ================= QUICK ORDER FORM ================= -->
+          <button class="accordion-header">🧾 Quick Order Form</button>
+          <div class="accordion-content">
+              <form id="orderForm" class="form-card">
+
+                  <input type="text" id="name" placeholder="Your Name" required />
+
+                  <div class="qty-row">
+                      <input type="number" id="kg" placeholder="Kg" />
+                      <span class="or-text">OR</span>
+                      <input type="number" id="pieces" placeholder="Pieces" />
+                  </div>
+
+                  <button type="submit" class="primary-btn">Send Order via WhatsApp</button>
+              </form>
+          </div>
+
+          <!-- ================= CONTACT ================= -->
+          <button class="accordion-header">📞 Contact Details</button>
+          <div class="accordion-content">
+              <p class="text-center bold">Pranab Mondal</p>
+              <p class="text-center"><a href="tel:+919679004046">📞 9679 004 046</a></p>
+          </div>
+
+          <!-- ================= REFER ================= -->
+          <button class="accordion-header">📢 Share Business Details</button>
+          <div class="accordion-content">
+
+              <button class="other-share-btn" onclick="shareViaNative()">
+                  <i class="fa-regular fa-share-from-square"></i>
+                  Share
+              </button>
+
+              <button class="share-btn whatsapp-share-btn" onclick="shareOnWhatsApp()">
+                  <i class="fa-brands fa-whatsapp"></i> Share on WhatsApp
+              </button>
+          </div>
+
+      </section>
   </main>
+
+
   <button id="installBtn" class="install-btn">📲 Install App</button>
   <div id="toast" class="toast">App installed successfully! 🎉</div>
 
@@ -165,5 +218,6 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="local-name-storage.js"></script>
 </body>
 </html>

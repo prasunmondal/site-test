@@ -31,22 +31,74 @@ document.getElementById("orderForm").addEventListener("submit", (e) => {
   window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, "_blank");
 });
 
+function shareOnWhatsApp() {
+  const text = `Mondal Brothers\n\nContact: 9679004046\nUPI: prsnmondal@ybl\nAlt UPI: mondalbrothers@upi\nBank: Canara Bank (Current)\nAccount No: 4400201000088\nIFSC: CNRB0000000`;
+
+  const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+  window.open(url, '_blank');
+}
+
+function shareViaNative() {
+  const shareData = {
+    title: "Mondal Brothers",
+    text: `Mondal Brothers\nContact: 9679004046\nUPI: prsnmondal@ybl\nBank: Canara Bank\nA/c: 4400201000088`,
+  };
+
+  if (navigator.share) {
+    navigator.share(shareData);
+  } else {
+    alert("Sharing not supported on this device. Try using WhatsApp Share button.");
+  }
+}
 
 function copyToClipboard(elementId) {
   const text = document.getElementById(elementId).innerText;
-  navigator.clipboard.writeText(text)
-    .then(() => alert("Copied: " + text));
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(`Copied: ${text}`);
+        });
 }
+
+function showToast(message) {
+  const toast = document.getElementById("copyToast");
+  toast.innerText = message;  // Use innerText to avoid issues
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 1500);
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  document.querySelectorAll(".copyable").forEach(item => {
+    item.addEventListener("click", () => {
+      const text = item.textContent.trim();
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(`Copied: ${text}`);
+      });
+    });
+  });
+});
+
 
 // Auto-generate UPI deep link from entered amount
 function openUPILink() {
-  const amount = document.getElementById("amt").value || "0";
+  const amountField = document.getElementById("amt");
+  const amount = amountField.value.trim();
   const upiId = "prsnmondal@ybl";
-  const name = "Mondal%20Brothers";
+  const name = encodeURIComponent("Prasun Mondal");
+  const note = encodeURIComponent("Payment - Mondal Brothers");
 
-  const url = `upi://pay?pa=${upiId}&pn=${name}&am=${amount}&cu=INR`;
+  // If no amount, create URL without am parameter
+  let url = `upi://pay?pa=${upiId}&pn=${name}&cu=INR&tn=${note}`;
 
-  window.location.href = url; // Opens supported UPI apps
+  // If valid amount added, include am parameter
+  if (amount && !isNaN(amount) && Number(amount) > 0) {
+    url += `&am=${amount}`;
+  }
+
+  window.location.href = url;
 }
 
 function payNow() {
@@ -80,7 +132,7 @@ installBtn.addEventListener("click", async () => {
 
 // When installed
 window.addEventListener("appinstalled", () => {
-  showToast("App installed successfully! 🎉 Open from your Home screen!");
+  showToast("Installing App...");
 });
 
 // Toast function
@@ -99,3 +151,24 @@ function showToast(message) {
 
 
 
+// Pre-Order
+function sendOccasionBooking() {
+    const name  = document.getElementById("occName").value.trim();
+    const title = document.getElementById("occTitle").value.trim();
+    const date  = document.getElementById("occDate").value.trim();
+    const qty   = document.getElementById("occQty").value.trim();
+
+    let lines = [];
+    lines.push("🎉 Occasion Pre-Booking Request\n");
+
+    if (name)  lines.push(`Name: ${name}`);
+    if (title) lines.push(`Occasion: ${title}`);
+    if (date)  lines.push(`Date: ${date}`);
+    if (qty)   lines.push(`Quantity: ${qty} Kg`);
+
+    lines.push("\nPlease confirm availability 😊");
+
+    const text = lines.join("\n");
+    const url = `https://wa.me/919679004046?text=${encodeURIComponent(text)}`;
+    window.open(url, "_blank");
+}
