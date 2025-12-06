@@ -68,3 +68,36 @@ let selectedType = null;
         autoExpand(el);
       }
     };
+
+    function openSettings() {
+      document.getElementById("settingsModal").style.display = "flex";
+      loadRateFields();
+    }
+
+    function closeSettings() {
+      document.getElementById("settingsModal").style.display = "none";
+    }
+
+    function loadRateFields() {
+      document.getElementById("rate_broiler_live").value = localStorage.getItem("rate_broiler_live") || "";
+      document.getElementById("rate_broiler_cut").value = localStorage.getItem("rate_broiler_cut") || "";
+      document.getElementById("rate_culbird_live").value = localStorage.getItem("rate_culbird_live") || "";
+      document.getElementById("rate_culbird_cut").value = localStorage.getItem("rate_culbird_cut") || "";
+    }
+
+    function saveSettings() {
+      localStorage.setItem("rate_broiler_live", document.getElementById("rate_broiler_live").value);
+      localStorage.setItem("rate_broiler_cut", document.getElementById("rate_broiler_cut").value);
+      localStorage.setItem("rate_culbird_live", document.getElementById("rate_culbird_live").value);
+      localStorage.setItem("rate_culbird_cut", document.getElementById("rate_culbird_cut").value);
+
+      // Clear current calculator values
+      document.getElementById("rate").value = "";
+      document.getElementById("kg").value = "";
+      document.getElementById("amount").value = "";
+
+      // Optional placeholder reset
+      document.getElementById("rate").placeholder = "Rate";
+
+      closeSettings();
+    }

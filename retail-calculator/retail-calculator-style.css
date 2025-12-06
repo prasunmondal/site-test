@@ -694,3 +694,64 @@ footer {
   margin-left: 8px;
   color: #000000;
 }
+
+
+.settings-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 1.7rem;
+  cursor: pointer;
+}
+
+/* Modal Overlay */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; right: 0; top: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal Card */
+.modal-content {
+  background: #fff;
+  width: 90%;
+  max-width: 420px;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.modal-save-btn {
+  width: 100%;
+  padding: 12px;
+  background: #28a745;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 10px;
+  border: none;
+  margin-top: 10px;
+}
+
+.modal-close-btn {
+  width: 100%;
+  padding: 12px;
+  background: #bbb;
+  border: none;
+  border-radius: 10px;
+  margin-top: 6px;
+}

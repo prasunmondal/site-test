@@ -25,6 +25,8 @@
             <small class="served-text">served by Mondal Brothers</small>
         </div>
     </div>
+    <button class="settings-btn" onclick="openSettings()">⚙️</button>
+
 </header>
 
 
@@ -64,18 +66,34 @@
 <button id="installBtn" class="install-btn">📲 Install App</button>
 <div id="toast" class="toast">App installed successfully! 🎉</div>
 
+<div id="settingsModal" class="modal">
+    <div class="modal-content">
+        <h3>Set Rates</h3>
+
+        <label>Broiler Live</label>
+        <input type="number" id="rate_broiler_live">
+
+        <label>Broiler Cut</label>
+        <input type="number" id="rate_broiler_cut">
+
+        <label>Culbird Live</label>
+        <input type="number" id="rate_culbird_live">
+
+        <label>Culbird Cut</label>
+        <input type="number" id="rate_culbird_cut">
+
+        <button onclick="saveSettings()" class="modal-save-btn">Save</button>
+        <button onclick="closeSettings()" class="modal-close-btn">Close</button>
+    </div>
+</div>
+
+
 <footer>
     © 2025 Mondal Brothers | Built with ❤️ in India
 </footer>
 
 <script src="script.js"></script>
 <script src="local-name-storage.js"></script>
-
-
-
-<!--///////////////////////////////-->
-
-
 
 <script src="retail-calculator-script.js"></script>
 
