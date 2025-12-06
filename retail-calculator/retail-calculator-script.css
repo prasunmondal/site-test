@@ -23,12 +23,18 @@ body {
           cursor: pointer;
           border: 2px solid transparent;
 
-          white-space: normal;         /* allow wrapping */
-          word-break: break-word;      /* break long text */
-          overflow-wrap: break-word;   /* fallback */
-            transition: 0.25s ease;
+          white-space: normal;          /* allow wrapping */
+          word-break: break-word;       /* break long text */
+          overflow-wrap: break-word;    /* fallback */
+          transition: 0.25s ease;
 
+          /* 🔒 Disable text selection */
+          -webkit-user-select: none;    /* Safari */
+          -moz-user-select: none;       /* Firefox */
+          -ms-user-select: none;        /* IE/Edge */
+          user-select: none;            /* Standard */
         }
+
 
 
         .choice-btn.active {
