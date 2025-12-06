@@ -43,3 +43,28 @@ let selectedType = null;
         localStorage.setItem("rate_" + selectedType, rate);
       }
     }
+
+    function saveShopName() {
+      localStorage.setItem("shop_name", document.getElementById("shopName").value);
+    }
+
+    window.onload = function () {
+      const saved = localStorage.getItem("shop_name");
+      if (saved) {
+        document.getElementById("shopName").value = saved;
+      }
+    }
+
+    function autoExpand(el) {
+      el.style.height = "auto";
+      el.style.height = el.scrollHeight + "px";
+    }
+
+    window.onload = function () {
+      const saved = localStorage.getItem("shop_name");
+      if (saved) {
+        const el = document.getElementById("shopName");
+        el.value = saved;
+        autoExpand(el);
+      }
+    };

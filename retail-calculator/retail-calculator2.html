@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chicken Rate Calculator</title>
+    <link rel="stylesheet" href="retail-calculator-script.css" />
+    <link rel="stylesheet" href="retail-calculator-style.css" />
+</head>
+
+<body>
+
+<span id="copyToast" class="toast">Copied!</span>
+
+
+<header class="hero">
+    <div class="title-wrapper">
+        <img src="../images/mb-icon.png" alt="Mondal Brothers Poultry Logo" class="logo">
+
+        <div class="text-block">
+            <textarea id="shopName" class="shop-input" rows="1"
+                      placeholder="Enter Your Shop Name"
+                      oninput="autoExpand(this); saveShopName();"></textarea>
+
+            <small class="served-text">served by Mondal Brothers</small>
+        </div>
+    </div>
+</header>
+
+
+
+
+<main>
+
+
+    <h2 style="font-weight:700;">🧮 Chicken Calculator</h2>
+    <p>Select chicken type and calculate easily</p>
+
+    <!-- 2x2 Buttons -->
+    <div class="grid-buttons">
+        <div class="choice-btn" onclick="setRate('broiler_live')">🐔 Broiler Live</div>
+        <div class="choice-btn" onclick="setRate('broiler_cut')">🔪 Broiler Cut</div>
+        <div class="choice-btn" onclick="setRate('culbird_live')">🐓 Culbird Live</div>
+        <div class="choice-btn" onclick="setRate('culbird_cut')">🔪 Culbird Cut</div>
+    </div>
+
+    <!-- MAIN CALCULATOR -->
+    <div class="calc-card">
+        <div class="calc-row">
+            <input id="rate" class="calc-field" type="number" placeholder="Rate" oninput="autoCalc('rate')">
+            <input id="kg" class="calc-field" type="number" placeholder="KG" oninput="autoCalc('kg')">
+            <input id="amount" class="calc-field" type="number" placeholder="Amount" oninput="autoCalc('amount')">
+        </div>
+
+        <p class="label-text">Enter KG or Amount — other will calculate automatically</p>
+    </div>
+    <section class="accordion">
+
+
+    </section>
+</main>
+
+
+<button id="installBtn" class="install-btn">📲 Install App</button>
+<div id="toast" class="toast">App installed successfully! 🎉</div>
+
+<footer>
+    © 2025 Mondal Brothers | Built with ❤️ in India
+</footer>
+
+<script src="script.js"></script>
+<script src="local-name-storage.js"></script>
+
+
+
+<!--///////////////////////////////-->
+
+
+
+<script src="retail-calculator-script.js"></script>
+
+</body>
+</html>

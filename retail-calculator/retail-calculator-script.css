@@ -1,16 +1,22 @@
 body {
           font-family: Arial, sans-serif;
           background: #f7f7f7;
-          padding: 20px;
         }
 
-        /* 2x2 grid buttons */
+        /* 1x4 grid buttons */
         .grid-buttons {
           display: grid;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: repeat(4, 1fr);   /* 4 columns */
           gap: 14px;
           margin-bottom: 20px;
         }
+
+        @media (max-width: 600px) {
+          .grid-buttons {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
 
         .choice-btn {
           background: #fff;
@@ -38,9 +44,11 @@ body {
 
         .calc-row {
           display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
+          grid-template-columns: 1fr;   /* single column */
+          grid-template-rows: auto auto auto;  /* 3 rows */
           gap: 10px;
         }
+
 
         .calc-field {
           padding: 14px;
