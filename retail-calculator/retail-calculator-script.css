@@ -6,29 +6,28 @@ body {
         /* 1x4 grid buttons */
         .grid-buttons {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);   /* 4 columns */
+          grid-template-columns: repeat(4, minmax(0, 1fr));
           gap: 14px;
           margin-bottom: 20px;
-        }
-
-        @media (max-width: 600px) {
-          .grid-buttons {
-            grid-template-columns: repeat(2, 1fr);
-          }
         }
 
 
         .choice-btn {
           background: #fff;
-          padding: 22px;
+          padding: 14px;
           border-radius: 18px;
           text-align: center;
-          font-size: 1.3rem;
+          font-size: .8rem;
           font-weight: 700;
           box-shadow: 0 6px 20px rgba(0,0,0,0.15);
           cursor: pointer;
           border: 2px solid transparent;
+
+          white-space: normal;         /* allow wrapping */
+          word-break: break-word;      /* break long text */
+          overflow-wrap: break-word;   /* fallback */
         }
+
 
         .choice-btn.active {
           border-color: #000;
@@ -44,9 +43,21 @@ body {
 
         .calc-row {
           display: grid;
-          grid-template-columns: 1fr;   /* single column */
-          grid-template-rows: auto auto auto;  /* 3 rows */
+          grid-template-columns: 1fr 50px; /* fields left, clear button right */
+          grid-template-rows: auto auto auto;
           gap: 10px;
+        }
+
+        .clear-btn {
+          grid-row: span 2;         /* spans KG + Amount rows vertically */
+          align-self: center;       /* centers vertically */
+          background: #ff3b30;
+          color: #fff;
+          border: none;
+          border-radius: 12px;
+          font-size: 1.2rem;
+          cursor: pointer;
+          height: 100%;
         }
 
 

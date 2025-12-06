@@ -40,8 +40,8 @@
 
     <!-- 2x2 Buttons -->
     <div class="grid-buttons">
-        <div class="choice-btn" onclick="setRate('broiler_live')">🐔 Broiler Live</div>
-        <div class="choice-btn" onclick="setRate('broiler_cut')">🔪 Broiler Cut</div>
+        <div class="choice-btn" onclick="setRate('broiler_live')">🐔   Broiler Live</div>
+        <div class="choice-btn" onclick="setRate('broiler_cut')">🔪   Broiler Cut</div>
         <div class="choice-btn" onclick="setRate('culbird_live')">🐓 Culbird Live</div>
         <div class="choice-btn" onclick="setRate('culbird_cut')">🔪 Culbird Cut</div>
     </div>
@@ -50,12 +50,20 @@
     <div class="calc-card">
         <div class="calc-row">
             <input id="rate" class="calc-field" type="number" placeholder="Rate" oninput="autoCalc('rate')">
+
+        </div>
+
+        <div class="calc-row">
             <input id="kg" class="calc-field" type="number" placeholder="KG" oninput="autoCalc('kg')">
             <input id="amount" class="calc-field" type="number" placeholder="Amount" oninput="autoCalc('amount')">
+
+            <!-- Clear button spans beside KG & Amount -->
+            <button class="clear-btn" onclick="clearKgAmount()">✖</button>
         </div>
 
         <p class="label-text">Enter KG or Amount — other will calculate automatically</p>
     </div>
+
     <section class="accordion">
 
 

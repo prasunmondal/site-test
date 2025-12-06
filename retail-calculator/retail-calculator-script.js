@@ -101,3 +101,8 @@ let selectedType = null;
 
       closeSettings();
     }
+
+function clearKgAmount() {
+  document.getElementById("kg").value = "";
+  document.getElementById("amount").value = "";
+}
