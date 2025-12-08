@@ -13,7 +13,7 @@
 <span id="copyToast" class="toast">Copied!</span>
 
 
-<header class="hero">
+<header class="hero shiny-gold">
     <div class="title-wrapper">
         <img src="../images/mb-icon.png" alt="Mondal Brothers Poultry Logo" class="logo">
 
@@ -22,10 +22,9 @@
                       placeholder="Enter Your Shop Name"
                       oninput="autoExpand(this); saveShopName();"></textarea>
 
-            <small class="served-text">served by Mondal Brothers</small>
+            <p class="served-text">Powered by Mondal Brothers.</p>
         </div>
     </div>
-    <button class="settings-btn" onclick="openSettings()">⚙️</button>
 
 </header>
 
@@ -35,35 +34,62 @@
 <main>
 
 
-    <h2 style="font-weight:700;">🧮 Chicken Calculator</h2>
-    <p>Select chicken type and calculate easily</p>
+    <div class="title-row">
+        <h2 class="title-soft-bold">Chicken Rate Calculator</h2>
+        <button class="settings-btn" onclick="openSettings()">⚙️</button>
+    </div>
+
+
+
+<!--    <p class="subtle-note">Select chicken type...</p>-->
 
     <!-- 2x2 Buttons -->
     <div class="grid-buttons">
-        <div class="choice-btn" onclick="setRate('broiler_live')">🐔   Broiler Live</div>
-        <div class="choice-btn" onclick="setRate('broiler_cut')">🔪   Broiler Cut</div>
-        <div class="choice-btn" onclick="setRate('culbird_live')">🐓 Culbird Live</div>
-        <div class="choice-btn" onclick="setRate('culbird_cut')">🔪 Culbird Cut</div>
+        <div class="choice-btn broiler_live" data-type="broiler_live" onclick="setRate('broiler_live')">🐔 Broiler Live</div>
+        <div class="choice-btn broiler_cut" data-type="broiler_cut" onclick="setRate('broiler_cut')">🔪 Broiler Cut</div>
+        <div class="choice-btn culbird_live" data-type="culbird_live" onclick="setRate('culbird_live')">🐓 Culbird Live</div>
+        <div class="choice-btn culbird_cut" data-type="culbird_cut" onclick="setRate('culbird_cut')">🔪 Culbird Cut</div>
     </div>
 
     <!-- MAIN CALCULATOR -->
     <div class="calc-card">
-        <div class="calc-row">
-            <input id="rate" class="calc-field" type="number" placeholder="Rate" oninput="autoCalc('rate')">
 
+        <div class="rate-display">
+            <div class="left-side">
+                <div class="selection-header">Current Selection:</div>
+                <div id="selectedTypeLabel" class="selected-type">None</div>
+            </div>
+
+            <div class="right-side">
+                <div class="rate-title">Rate</div>
+                <input id="rate" class="rate-input" type="number" placeholder="Rate" oninput="autoCalc('rate')">
+            </div>
         </div>
 
-        <div class="calc-row">
-            <input id="kg" class="calc-field" type="number" placeholder="KG" oninput="autoCalc('kg')">
-            <!-- Clear button spans beside KG & Amount -->
-            <button class="clear-btn" onclick="clearKgAmount()">✖</button>
-            <input id="amount" class="calc-field" type="number" placeholder="Amount" oninput="autoCalc('amount')">
 
 
+        <div class="calc-flex">
+            <div class="left-col">
+
+                <div class="input-wrap">
+                    <input id="kg" class="calc-field has-suffix" type="number" placeholder="KG" oninput="autoCalc('kg')">
+                    <span class="suffix">kg</span>
+                </div>
+
+                <div class="input-wrap">
+                    <span class="prefix">₹</span>
+                    <input id="amount" class="calc-field has-prefix" type="number" placeholder="Amount" oninput="autoCalc('amount')">
+                </div>
+
+            </div>
+
+            <button class="clear-btn span-btn" onclick="clearKgAmount()">✖</button>
         </div>
 
-        <p class="label-text">Enter KG or Amount — other will calculate automatically</p>
+<!--        <p class="label-text">Enter KG or Amount — other will calculate automatically</p>-->
     </div>
+
+
 
     <section class="accordion">
 
@@ -79,22 +105,35 @@
     <div class="modal-content">
         <h3>Set Rates</h3>
 
-        <label>Broiler Live</label>
-        <input type="number" id="rate_broiler_live">
+        <div class="rate-row">
+            <label>Broiler Live</label>
+            <input type="number" id="rate_broiler_live">
+            <button class="clear-rate-btn" onclick="clearField('rate_broiler_live')">✖</button>
+        </div>
 
-        <label>Broiler Cut</label>
-        <input type="number" id="rate_broiler_cut">
+        <div class="rate-row">
+            <label>Broiler Cut</label>
+            <input type="number" id="rate_broiler_cut">
+            <button class="clear-rate-btn" onclick="clearField('rate_broiler_cut')">✖</button>
+        </div>
 
-        <label>Culbird Live</label>
-        <input type="number" id="rate_culbird_live">
+        <div class="rate-row">
+            <label>Culbird Live</label>
+            <input type="number" id="rate_culbird_live">
+            <button class="clear-rate-btn" onclick="clearField('rate_culbird_live')">✖</button>
+        </div>
 
-        <label>Culbird Cut</label>
-        <input type="number" id="rate_culbird_cut">
+        <div class="rate-row">
+            <label>Culbird Cut</label>
+            <input type="number" id="rate_culbird_cut">
+            <button class="clear-rate-btn" onclick="clearField('rate_culbird_cut')">✖</button>
+        </div>
 
         <button onclick="saveSettings()" class="modal-save-btn">Save</button>
         <button onclick="closeSettings()" class="modal-close-btn">Close</button>
     </div>
 </div>
+
 
 
 <footer>

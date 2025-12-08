@@ -1,24 +1,87 @@
 let selectedType = null;
 
     function setRate(type) {
-      selectedType = type;
+        localStorage.setItem("selectedType", type);   // save selected type
+        const rate = localStorage.getItem(`rate_${type}`);
+        document.getElementById("rate").value = rate;
 
-      // Highlight active button
-      document.querySelectorAll('.choice-btn').forEach(btn => btn.classList.remove("active"));
-      event.target.classList.add("active");
+        const readable = type.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+        document.getElementById("selectedTypeLabel").textContent = readable;
 
-      // Load saved rate for selected type
-      const savedRate = localStorage.getItem("rate_" + type);
-      if (savedRate && savedRate !== "") {
-         document.getElementById("rate").value = savedRate;
-<!--         document.getElementById("rate").placeholder = "Rate";-->
-      } else {
-         document.getElementById("rate").value = "";
-<!--         document.getElementById("rate").placeholder = "Rate";-->
-         document.getElementById("kg").value = "";
-         document.getElementById("amount").value = "";
-      }
+        recalcAfterRateUpdate();
+        focusKg();
+
+        highlightSelectedButton(type);
     }
+
+
+    function highlightSelectedButton(type) {
+        document.querySelectorAll(".choice-btn").forEach(btn => btn.classList.remove("active"));
+        const activeBtn = document.querySelector(`.choice-btn[data-type="${type}"]`);
+        if (activeBtn) activeBtn.classList.add("active");
+    }
+
+//window.onload = () => {
+//    const savedType =
+//    if (savedType) {
+//        setRate(savedType);            // auto-fill rate & label
+//        highlightSelectedButton(savedType);
+//    }
+//};
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const savedType = localStorage.getItem("selectedType");
+
+    if (savedType) {
+        const savedRate = localStorage.getItem(`rate_${savedType}`) || "";
+
+        // Set rate input
+        const rateInput = document.getElementById("rate");
+        if (rateInput) {
+            rateInput.value = savedRate;
+        }
+
+        // Restore label + button active state
+        updateSelectionUI(savedType);
+    }
+});
+
+
+function updateSelectionUI(type) {
+    // Human-readable text
+    const readable = type
+        .replace(/_/g, " ")
+        .replace(/\b\w/g, c => c.toUpperCase());
+
+    const labelEl = document.getElementById("selectedTypeLabel");
+    if (labelEl) {
+        labelEl.textContent = readable;
+    }
+
+    // Highlight active button
+    document.querySelectorAll(".choice-btn").forEach(btn => {
+        const btnType = btn.getAttribute("data-type");
+        btn.classList.toggle("active", btnType === type);
+    });
+
+    focusKg();
+}
+
+
+
+function recalcAfterRateUpdate() {
+    const rate = Number(document.getElementById("rate").value);
+    const kg = Number(document.getElementById("kg").value);
+    const amount = Number(document.getElementById("amount").value);
+
+    if (kg > 0) {
+        document.getElementById("amount").value = (rate * kg).toFixed(2);
+    } else if (amount > 0 && rate > 0) {
+        document.getElementById("kg").value = (amount / rate).toFixed(2);
+    }
+}
+
 
     // Auto calculate based on user change
     function autoCalc(changed) {
@@ -98,11 +161,45 @@ let selectedType = null;
 
       // Optional placeholder reset
       document.getElementById("rate").placeholder = "Rate";
-
+      location.reload();
       closeSettings();
     }
 
 function clearKgAmount() {
   document.getElementById("kg").value = "";
   document.getElementById("amount").value = "";
+  focusKg();
 }
+
+
+document.addEventListener("DOMContentLoaded", () => {
+            const rateKeys = [
+                { key: "rate_broiler_live", btnClass: "broiler_live" },
+                { key: "rate_broiler_cut", btnClass: "broiler_cut" },
+                { key: "rate_culbird_live", btnClass: "culbird_live" },
+                { key: "rate_culbird_cut", btnClass: "culbird_cut" }
+            ];
+
+            rateKeys.forEach(({ key, btnClass }) => {
+                const savedRate = localStorage.getItem(key);
+                const btn = document.querySelector(`.${btnClass}`);
+
+                if (!savedRate || savedRate.trim() === "" || Number(savedRate) === 0) {
+                    btn.style.display = "none";      // hide if not set
+                } else {
+                    btn.style.display = "block";     // show if set
+                }
+            });
+        });
+
+function clearField(id) {
+    const input = document.getElementById(id);
+    input.value = "";
+}
+
+function focusKg() {
+    const kgInput = document.getElementById("kg");
+    kgInput.focus();
+    kgInput.select();  // optional: highlights current text for typing quickly
+}
+

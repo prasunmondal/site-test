@@ -37,7 +37,7 @@ main {
   background: linear-gradient(180deg, #F5B041 0%, #D68910 100%);
   color: #ffffff;
   text-align: center;
-  padding: 40px 20px;
+  padding: 10px 10px;
   box-shadow: var(--shadow);
 }
 .hero h1 {
@@ -358,6 +358,10 @@ form button:hover {
   opacity: 0;
   transition: opacity 0.4s ease, visibility 0.4s;
   z-index: 9999;
+
+  background: #f4a300;
+      color: white;
+      border-radius: 10px;
 }
 .toast.show {
   visibility: visible;
@@ -613,4 +617,43 @@ footer {
   display: flex;
   align-items: center;        /* vertically center everything */
   justify-content: space-between;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+
+footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background: linear-gradient(180deg, #F5B041 0%, #D68910 100%);
+    color: #ffffff;
+    text-align: center;
+    padding: 7px 0;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    z-index: 100; /* keep it above content */
+        background: #F5B041;      /* golden yellow */
+        color: #222;              /* dark text for contrast */
+        text-align: center;
+        padding: 5px 0;
+        font-size: 13px;
+        font-weight: 600;
+}
+
+body {
+    margin: 0;
+    padding-bottom: 800px;  /* roughly the height of the footer */
+    box-sizing: border-box;
 }
