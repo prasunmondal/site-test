@@ -163,6 +163,11 @@ function recalcAfterRateUpdate() {
       document.getElementById("rate").placeholder = "Rate";
       location.reload();
       closeSettings();
+
+      // Log
+      const logMessage = `Rate Set: BL=${broilerLiveRate}, BC=${broilerCutRate}, CL=${culbirdLiveRate}, CC=${culbirdCutRate}`;
+      trackEvent("Rate Set Complete:2")
+      trackEvent(`Rate Set Complete: ${logMessage}`)
     }
 
 function clearKgAmount() {

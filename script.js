@@ -1,8 +1,12 @@
 const accordions = document.querySelectorAll(".accordion-header");
 accordions.forEach(btn => {
   btn.addEventListener("click", () => {
+
     const content = btn.nextElementSibling;
     content.classList.toggle("open");
+    if (content.classList.contains("open")) {
+          trackEvent(`Expanded Header: ${btn.textContent}`);
+    }
   });
 });
 
@@ -23,15 +27,17 @@ document.getElementById("orderForm").addEventListener("submit", (e) => {
   if (pieces && kg) qtyText = `${pieces} pieces and ${kg} kg`;
 
   const message =
-    `Hello, I am ${name}${shop ? " from " + shop : ""}. ` +
+    `Hello, I am ${name}.` +
     `I want to order ${qtyText}${product ? " of " + product : ""}.`;
 
   const phone = "919679004046"; // Replace with your business number
+    trackEvent(`Clicked Order Online: ${message}`)
 
   window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, "_blank");
 });
 
 function shareOnWhatsApp() {
+  trackEvent("Refer Clicked - Whatsapp");
   const text = `Mondal Brothers\n\nContact: 9679004046\nUPI: prsnmondal@ybl\nAlt UPI: mondalbrothers@upi\nBank: Canara Bank (Current)\nAccount No: 4400201000088\nIFSC: CNRB0000000`;
 
   const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
@@ -39,6 +45,7 @@ function shareOnWhatsApp() {
 }
 
 function shareViaNative() {
+  trackEvent("Refer Clicked - Native");
   const shareData = {
     title: "Mondal Brothers",
     text: `Mondal Brothers\nContact: 9679004046\nUPI: prsnmondal@ybl\nBank: Canara Bank\nA/c: 4400201000088`,
@@ -89,6 +96,8 @@ function openUPILink() {
   const upiId = "prsnmondal@ybl";
   const name = encodeURIComponent("Prasun Mondal");
   const note = encodeURIComponent("Payment - Mondal Brothers");
+
+  trackEvent(`Clicked: Pay via UPI: ${amount}`)
 
   // If no amount, create URL without am parameter
   let url = `upi://pay?pa=${upiId}&pn=${name}&cu=INR&tn=${note}`;
@@ -169,6 +178,9 @@ function sendOccasionBooking() {
     lines.push("\nPlease confirm availability 😊");
 
     const text = lines.join("\n");
+
+    trackEvent(`Prebooking: ${text}`)
+
     const url = `https://wa.me/919679004046?text=${encodeURIComponent(text)}`;
     window.open(url, "_blank");
 }
