@@ -1,73 +1,76 @@
 // ------------------------------
-// GLOBALS
+// GLOBAL
 // ------------------------------
 let deferredPrompt = null;
 
 // ------------------------------
-// Detect installation mode
+// Detect if running as PWA
 // ------------------------------
 function isPwaInstalled() {
     return (
-        window.matchMedia("(display-mode: standalone)").matches ||
-        window.navigator.standalone === true // iOS Safari
+        window.matchMedia("(display-mode: standalone)").matches || // Android/Desktop
+        window.navigator.standalone === true                       // iOS Safari
     );
 }
 
 // ------------------------------
-// Hide or show install button
+// Hide install button by default
 // ------------------------------
-function updateInstallButton() {
+function hideInstallButton() {
     const installBtn = document.getElementById("installBtn");
-    if (!installBtn) return; // No button on this page
-
-    if (isPwaInstalled()) {
-        installBtn.style.display = "none";
-    }
+    if (installBtn) installBtn.style.display = "none";
 }
 
 // ------------------------------
-// Handle beforeinstallprompt
+// Show install button
+// ------------------------------
+function showInstallButton() {
+    const installBtn = document.getElementById("installBtn");
+    if (installBtn) installBtn.style.display = "block";
+}
+
+// ------------------------------
+// BEFOREINSTALLPROMPT — only fires when NOT installed
 // ------------------------------
 window.addEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
     deferredPrompt = e;
 
-    const installBtn = document.getElementById("installBtn");
-    if (!installBtn) return;
-
+    // Only show install button if app is not installed
     if (!isPwaInstalled()) {
-        installBtn.style.display = "block";
+        showInstallButton();
     }
 });
 
 // ------------------------------
-// Handle user clicking install button
+// Install Button Click
 // ------------------------------
 async function installPwa() {
     if (!deferredPrompt) return;
 
     deferredPrompt.prompt();
-    const result = await deferredPrompt.userChoice;
+    const choice = await deferredPrompt.userChoice;
 
-    if (result.outcome === "accepted") {
-        localStorage.setItem("pwaInstalled", "yes");
-    }
+    // Hide button after the user accepts or dismisses
+    hideInstallButton();
+
+    // Reset
     deferredPrompt = null;
-
-    updateInstallButton();
 }
 
 // ------------------------------
-// Handle install event
+// When app actually gets installed
 // ------------------------------
 window.addEventListener("appinstalled", () => {
-    localStorage.setItem("pwaInstalled", "yes");
-    updateInstallButton();
+    hideInstallButton(); // Installed → hide button
 });
 
 // ------------------------------
-// Initialize on page load
+// On Load
 // ------------------------------
 window.addEventListener("DOMContentLoaded", () => {
-    updateInstallButton();
+    // If PWA already installed → never show button
+    if (isPwaInstalled()) {
+        hideInstallButton();
+    }
 });
