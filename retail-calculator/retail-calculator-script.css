@@ -10,7 +10,7 @@ body {
               width: 100%;
               flex-wrap: nowrap;      /* important */
               justify-content: space-between;
-          margin-bottom: 12px;
+          margin-bottom: 10px;
         }
 
         .choice-btn {
@@ -51,7 +51,7 @@ body {
 
         .calc-card {
           background: #fff;
-          padding: 10px;
+          padding: 7px;
           border-radius: 18px;
           box-shadow: 0 6px 20px rgba(0,0,0,0.12);
         }

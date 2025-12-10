@@ -4,9 +4,18 @@ const urlsToCache = [
   "./index.html",
   "./style.css",
   "./script.js",
+  "./pwa-installation.js",
+  "./log-worker.js",
+  "./local-name-storage.js",
+  "./header-style.css",
+  "./retail-calculator/retail-calculator.html",
+  "./retail-calculator/retail-calculator-script.css",
+  "./retail-calculator/retail-calculator-script.js",
+  "./retail-calculator/retail-calculator-style.css",
   "./images/payment-qr.jpeg",
-  "./images/icon-192.png",
-  "./images/icon-512.png"
+  "./images/icon-192.jpg",
+  "./images/icon-512.jpg",
+  "./images/mb-icon.png"
 ];
 
 self.addEventListener("install", event => {

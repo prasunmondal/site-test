@@ -183,7 +183,7 @@ form button:hover {
   box-shadow: var(--shadow);
 }
 .accordion-content.open {
-  padding: 20px;
+  padding: 10px;
   max-height: max-content; /* Use a large value or max-content */
 }
 
@@ -534,7 +534,7 @@ footer {
   background: #25D366;        /* WhatsApp green */
   color: #fff;
   border: none;
-  padding: 14px 20px;
+  padding: 10px 0px;
   margin-top: 14px;
   font-size: 1rem;
   font-weight: 300;
@@ -656,4 +656,21 @@ body {
     margin: 0;
     padding-bottom: 800px;  /* roughly the height of the footer */
     box-sizing: border-box;
+}
+
+.share-grid {
+    display: flex;
+    justify-content: space-between; /* left + right columns */
+    gap: 10px;
+}
+
+.share-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0px; /* vertical spacing between buttons */
+}
+
+.share-column button {
+    width: 100%;
+    font-size: 12px;
 }

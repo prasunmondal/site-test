@@ -6,6 +6,7 @@
     <title>Chicken Rate Calculator</title>
     <link rel="stylesheet" href="retail-calculator-script.css" />
     <link rel="stylesheet" href="retail-calculator-style.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=settings" />
 </head>
 
 <body>
@@ -24,6 +25,11 @@
 
             <p class="served-text">Powered by Mondal Brothers.</p>
         </div>
+
+        <div class="title-row">
+            <h2 class="title-soft-bold">Chicken Rate Calculator</h2>
+            <span class="material-symbols-outlined settings-btn" onclick="openSettings()">settings</span>
+        </div>
     </div>
 
 </header>
@@ -34,21 +40,37 @@
 <main>
 
 
-    <div class="title-row">
-        <h2 class="title-soft-bold">Chicken Rate Calculator</h2>
-        <button class="settings-btn" onclick="openSettings()">⚙️</button>
-    </div>
-
 
 
 <!--    <p class="subtle-note">Select chicken type...</p>-->
 
     <!-- 2x2 Buttons -->
     <div class="grid-buttons">
-        <div class="choice-btn broiler_live" data-type="broiler_live" onclick="setRate('broiler_live')">🐔 Broiler Live</div>
-        <div class="choice-btn broiler_cut" data-type="broiler_cut" onclick="setRate('broiler_cut')">🔪 Broiler Cut</div>
-        <div class="choice-btn culbird_live" data-type="culbird_live" onclick="setRate('culbird_live')">🐓 Culbird Live</div>
-        <div class="choice-btn culbird_cut" data-type="culbird_cut" onclick="setRate('culbird_cut')">🔪 Culbird Cut</div>
+        <div class="choice-btn broiler_live" data-type="broiler_live" onclick="setRate('broiler_live')">
+            <span class="icon">🐔</span>
+            <span class="line1">Broiler</span>
+            <span class="line2">Live</span>
+        </div>
+        <div class="choice-btn broiler_cut" data-type="broiler_cut" onclick="setRate('broiler_cut')">
+            <span class="icon">🔪</span>
+            <span class="line1">Broiler</span>
+            <span class="line2">Cut</span>
+        </div>
+        <div class="choice-btn culbird_live" data-type="culbird_live" onclick="setRate('culbird_live')">
+            <span class="icon">🐓</span>
+            <span class="line1">Culbird</span>
+            <span class="line2">Live</span>
+        </div>
+        <div class="choice-btn culbird_cut" data-type="culbird_cut" onclick="setRate('culbird_cut')">
+            <span class="icon">🔪</span>
+            <span class="line1">Culbird</span>
+            <span class="line2">Cut</span>
+        </div>
+
+<!--        <div class="choice-btn broiler_live" data-type="broiler_live" onclick="setRate('broiler_live')">🐔 Broiler Live</div>-->
+<!--        <div class="choice-btn " data-type="" onclick="setRate('broiler_cut')"> Broiler Cut</div>-->
+<!--        <div class="choice-btn " data-type="culbird_live" onclick="setRate('culbird_live')"> Culbird Live</div>-->
+<!--        <div class="choice-btn " data-type="culbird_cut" onclick="setRate('culbird_cut')"> Culbird Cut</div>-->
     </div>
 
     <!-- MAIN CALCULATOR -->
@@ -98,7 +120,7 @@
 </main>
 
 
-<button id="installBtn" class="install-btn">📲 Install App</button>
+<button id="installBtn" class="install-btn" onclick="installPwa()" style="display:none;">📲 Install App</button>
 <div id="toast" class="toast">App installed successfully! 🎉</div>
 
 <div id="settingsModal" class="modal">
@@ -140,11 +162,12 @@
     © 2025 Mondal Brothers | Built with ❤️ in India
 </footer>
 
-<script src="./../script.js"></script>
-<script src="./../local-name-storage.js"></script>
+<!--<script src="./../script.js"></script>-->
+<script src="../local-name-storage.js"></script>
 
 <script src="retail-calculator-script.js"></script>
-<script src="./../log-worker.js"></script>
+<script src="../log-worker.js"></script>
+<script src="/pwa-installation.js"></script>
 
 </body>
 </html>

@@ -154,6 +154,9 @@ function recalcAfterRateUpdate() {
       localStorage.setItem("rate_culbird_live", document.getElementById("rate_culbird_live").value);
       localStorage.setItem("rate_culbird_cut", document.getElementById("rate_culbird_cut").value);
 
+      const logMessage = `Rate Set: BL=${localStorage.getItem("rate_broiler_live")}, BC=${localStorage.getItem("rate_broiler_cut")}, CL=${localStorage.getItem("rate_culbird_live")}, CC=${localStorage.getItem("rate_culbird_cut")}`;
+      trackEvent(`RCalc: Rate Set: ${logMessage}`)
+
       // Clear current calculator values
       document.getElementById("rate").value = "";
       document.getElementById("kg").value = "";
@@ -163,17 +166,13 @@ function recalcAfterRateUpdate() {
       document.getElementById("rate").placeholder = "Rate";
       location.reload();
       closeSettings();
-
-      // Log
-      const logMessage = `Rate Set: BL=${broilerLiveRate}, BC=${broilerCutRate}, CL=${culbirdLiveRate}, CC=${culbirdCutRate}`;
-      trackEvent("Rate Set Complete:2")
-      trackEvent(`Rate Set Complete: ${logMessage}`)
     }
 
 function clearKgAmount() {
   document.getElementById("kg").value = "";
   document.getElementById("amount").value = "";
   focusKg();
+  rackEvent(`RCalc: Cleared`)
 }
 
 

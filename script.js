@@ -1,3 +1,5 @@
+const whatsappNumber = "919679004046"
+
 const accordions = document.querySelectorAll(".accordion-header");
 accordions.forEach(btn => {
   btn.addEventListener("click", () => {
@@ -5,7 +7,7 @@ accordions.forEach(btn => {
     const content = btn.nextElementSibling;
     content.classList.toggle("open");
     if (content.classList.contains("open")) {
-          trackEvent(`Expanded Header: ${btn.textContent}`);
+          trackEvent(`Clicked Header: ${btn.textContent}`);
     }
   });
 });
@@ -29,26 +31,72 @@ document.getElementById("orderForm").addEventListener("submit", (e) => {
   const message =
     `Hello, I am ${name}.` +
     `I want to order ${qtyText}${product ? " of " + product : ""}.`;
-
-  const phone = "919679004046"; // Replace with your business number
     trackEvent(`Clicked Order Online: ${message}`)
 
-  window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, "_blank");
+  window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank");
 });
 
-function shareOnWhatsApp() {
-  trackEvent("Refer Clicked - Whatsapp");
-  const text = `Mondal Brothers\n\nContact: 9679004046\nUPI: prsnmondal@ybl\nAlt UPI: mondalbrothers@upi\nBank: Canara Bank (Current)\nAccount No: 4400201000088\nIFSC: CNRB0000000`;
+function shareOnWhatsAppEnglish() {
+  trackEvent("Click: Refer English Whatsapp");
+const text = `Hi! If you're looking for a reliable fresh-chicken supplier for your shop, Mondal Brothers is a name you can trust.
+You get good quality, fair prices, and on-time delivery - every day!
+Computerised accounting, transaction messages, and statements - everything is at your fingertips.
+Definitely try them out!
+
+Mondal Brothers
+Contact: 9734075801
+Website: https://tinyurl.com/mondalbros`;
 
   const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
   window.open(url, '_blank');
 }
 
-function shareViaNative() {
-  trackEvent("Refer Clicked - Native");
+function shareViaNativeEnglish() {
+  trackEvent("Click: Refer English Native");
   const shareData = {
     title: "Mondal Brothers",
-    text: `Mondal Brothers\nContact: 9679004046\nUPI: prsnmondal@ybl\nBank: Canara Bank\nA/c: 4400201000088`,
+    text: `Hi! If you're looking for a reliable fresh-chicken supplier for your shop, Mondal Brothers is a name you can trust.
+You get good quality, fair prices, and on-time delivery - every day!
+Computerised accounting, transaction messages, and statements - everything is at your fingertips.
+Definitely try them out!
+
+Mondal Brothers
+Contact: 9734075801
+Website: https://tinyurl.com/mondalbros`
+  };
+
+  if (navigator.share) {
+    navigator.share(shareData);
+  } else {
+    alert("Sharing not supported on this device. Try using WhatsApp Share button.");
+  }
+}
+
+function shareOnWhatsAppBengali() {
+  trackEvent("Click: Refer Bengali Whatsapp");
+const text = `দোকানের জন্য নির্ভরযোগ্য ফ্রেশ চিকেন সাপ্লায়ার চাইলে মন্ডল ব্রাদার্স ভরসাযোগ্য।
+ভালো কোয়ালিটি, ঠিক দাম, সময়মতো ডেলিভারি।
+কম্পিউটারাইজড হিসাব, লেনদেনের মেসেজ, আর স্টেটমেন্ট—সবকিছুই আপনার হাতে।
+
+মন্ডল ব্রাদার্স
+Contact: 9734075801
+Website: https://tinyurl.com/mondalbros`;
+
+  const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+  window.open(url, '_blank');
+}
+
+function shareViaNativeBengali() {
+  trackEvent("Click: Refer Bengali Native");
+  const shareData = {
+    title: "Mondal Brothers",
+    text: `দোকানের জন্য নির্ভরযোগ্য ফ্রেশ চিকেন সাপ্লায়ার চাইলে মন্ডল ব্রাদার্স ভরসাযোগ্য।
+ভালো কোয়ালিটি, ঠিক দাম, সময়মতো ডেলিভারি।
+কম্পিউটারাইজড হিসাব, লেনদেনের মেসেজ, আর স্টেটমেন্ট—সবকিছুই আপনার হাতে।
+
+মন্ডল ব্রাদার্স
+Contact: 9734075801
+Website: https://tinyurl.com/mondalbros`
   };
 
   if (navigator.share) {
@@ -95,7 +143,7 @@ function openUPILink() {
   const amount = amountField.value.trim();
   const upiId = "prsnmondal@ybl";
   const name = encodeURIComponent("Prasun Mondal");
-  const note = encodeURIComponent("Payment - Mondal Brothers");
+  const note = encodeURIComponent("Paying Mondal Brothers");
 
   trackEvent(`Clicked: Pay via UPI: ${amount}`)
 
@@ -114,48 +162,6 @@ function payNow() {
   openUPILink();
 }
 
-
-
-// PWA - start
-
-
-
-let deferredPrompt;
-const installBtn = document.getElementById("installBtn");
-const toast = document.getElementById("toast");
-
-installBtn.style.display = "none";
-
-window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  installBtn.style.display = "block";
-});
-
-installBtn.addEventListener("click", async () => {
-  installBtn.style.display = "none";
-  deferredPrompt.prompt();
-  const result = await deferredPrompt.userChoice;
-  deferredPrompt = null;
-});
-
-// When installed
-window.addEventListener("appinstalled", () => {
-  showToast("Installing App...");
-});
-
-// Toast function
-function showToast(message) {
-  toast.textContent = message;
-  toast.classList.add("show");
-
-  setTimeout(() => {
-    toast.classList.remove("show");
-  }, 3500);
-}
-
-
-// PWA - end
 
 
 
@@ -181,6 +187,6 @@ function sendOccasionBooking() {
 
     trackEvent(`Prebooking: ${text}`)
 
-    const url = `https://wa.me/919679004046?text=${encodeURIComponent(text)}`;
+    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
     window.open(url, "_blank");
 }
