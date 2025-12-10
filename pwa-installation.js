@@ -9,8 +9,7 @@ let deferredPrompt = null;
 function isPwaInstalled() {
     return (
         window.matchMedia("(display-mode: standalone)").matches ||
-        window.navigator.standalone === true || // iOS
-        localStorage.getItem("pwaInstalled") === "yes"
+        window.navigator.standalone === true // iOS Safari
     );
 }
 
