@@ -193,7 +193,7 @@ function saveAndClearKgAmount() {
         return;
     }
 
-    logSale(type, kg, rate, new Date().toISOString());
+    logSale(type, kg, rate, getISTISOString());
 
     document.getElementById("kg").value = "";
     document.getElementById("amount").value = "";
