@@ -1,9 +1,12 @@
 let selectedType = null;
+window.currentType = null;
+
 
     function setRate(type) {
         localStorage.setItem("selectedType", type);   // save selected type
         const rate = localStorage.getItem(`rate_${type}`);
         document.getElementById("rate").value = rate;
+        window.currentType = type;
 
         const readable = type.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
         document.getElementById("selectedTypeLabel").textContent = readable;
@@ -168,11 +171,34 @@ function recalcAfterRateUpdate() {
       closeSettings();
     }
 
+function saveAndClearKgAmount() {
+ const kgField = document.getElementById("kg");
+    const kg = parseFloat(document.getElementById("kg").value);
+        const type = window.currentType;
+
+        if (!type) {
+            console.warn("No chicken type selected — cannot log sale.");
+            return;
+        }
+
+        if (!kg || kg <= 0) {
+            console.warn("No KG entered — skipping log.");
+            return;
+        }
+
+        logSale(type, kg);
+
+  document.getElementById("kg").value = "";
+  document.getElementById("amount").value = "";
+  focusKg();
+  trackEvent(`RCalc: Saved`)
+}
+
 function clearKgAmount() {
   document.getElementById("kg").value = "";
   document.getElementById("amount").value = "";
   focusKg();
-  rackEvent(`RCalc: Cleared`)
+  trackEvent(`RCalc: Cleared`)
 }
 
 
@@ -207,3 +233,52 @@ function focusKg() {
     kgInput.select();  // optional: highlights current text for typing quickly
 }
 
+
+
+// Logging sales
+
+function logSale(type, kg) {
+    const allSales = JSON.parse(localStorage.getItem("salesLog") || "[]");
+
+    allSales.push({
+        type: type,
+        kg: kg,
+        time: new Date().toISOString()
+    });
+
+    localStorage.setItem("salesLog", JSON.stringify(allSales));
+}
+
+function getSalesReport() {
+    const allSales = JSON.parse(localStorage.getItem("salesLog") || "[]");
+
+    const summary = {};
+
+    allSales.forEach(entry => {
+        if (!summary[entry.type]) {
+            summary[entry.type] = 0;
+        }
+        summary[entry.type] += entry.kg;
+    });
+
+    return summary;
+}
+
+
+function showReport() {
+    const report = getSalesReport();
+    let html = "<h3>KG Sold Report</h3><ul>";
+
+    for (const type in report) {
+        html += `<li>${type}: <b>${report[type]} kg</b></li>`;
+    }
+
+    html += "</ul>";
+
+    document.getElementById("reportBox").innerHTML = html;
+}
+
+
+function clearSalesReport() {
+    localStorage.removeItem("salesLog");
+}
