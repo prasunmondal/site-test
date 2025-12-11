@@ -73,6 +73,13 @@ body {
           font-size: 1.2rem;
           cursor: pointer;
           height: 100%;
+          width: 40px;
+        }
+
+        .clear-btn:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+                background: #ffb5b5;
         }
 
 
@@ -86,8 +93,14 @@ body {
           font-size: 1.2rem;
           cursor: pointer;
           height: 100%;
+          width: 60px;
         }
 
+        .save-and-clear-btn:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+                background: #A6F5A6;
+        }
 
         .calc-field {
 

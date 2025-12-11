@@ -841,7 +841,6 @@ footer {
 }
 
 .span-btn {
-    width: 60px;
     height: -webkit-fill-available;
     display: flex;
     justify-content: center;
@@ -852,13 +851,6 @@ footer {
         color: #d64545;
             transition: 0.25s;
 
-}
-
-
-.span-btn:hover {
-    transform: scale(1.05);
-    opacity: 0.9;
-        background: #ffb5b5;
 }
 
 .input-wrap {
