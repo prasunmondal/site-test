@@ -9,19 +9,20 @@ function logSale(type, kg, rate, saleTimestamp) {
 
     const allSales = JSON.parse(localStorage.getItem("salesLog") || "[]");
 
-    const recordTimestamp = new Date().toISOString();
+    const recordTimestamp = getISTISOString(); // IST timestamp
 
     allSales.push({
         type,
         kg: Number(kg),
         rate: Number(rate),
-        amount: Number(kg) * Number(rate),  // auto compute
-        saleTimestamp,
+        amount: Number(kg) * Number(rate),
+        saleTimestamp: saleTimestamp || getISTISOString(),
         recordTimestamp
     });
 
     localStorage.setItem("salesLog", JSON.stringify(allSales));
 }
+
 
 
 // Build daily × type table data
@@ -220,11 +221,10 @@ function addTransaction() {
         return;
     }
 
-    // Sale timestamp = modal date + midnight
-    const saleTimestamp = `${modalDate}T00:00:00.000Z`;
+    // midnight IST for the modal date
+    const saleTimestamp = `${modalDate}T00:00:00+05:30`;
 
-    // Record timestamp = actual time now
-    const recordTimestamp = new Date().toISOString();
+    const recordTimestamp = getISTISOString();
 
     let allSales = JSON.parse(localStorage.getItem("salesLog") || "[]");
 
@@ -245,6 +245,34 @@ function addTransaction() {
     showTransactions(modalDate, modalType);
     showReport();
 }
+
+
+
+function getISTISOString(date = new Date()) {
+    // IST = UTC + 5:30
+    const istOffset = 5.5 * 60 * 60 * 1000;
+    const istDate = new Date(date.getTime() + istOffset);
+
+    return istDate.toISOString().replace("Z", "+05:30");
+}
+function formatIST(iso) {
+    if (!iso) return "—";
+
+    const date = new Date(iso);
+    const options = {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+        timeZone: "Asia/Kolkata"
+    };
+
+    return new Intl.DateTimeFormat("en-GB", options).format(date);
+}
+
 
 
 
