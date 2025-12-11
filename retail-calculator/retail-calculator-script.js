@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function updateSelectionUI(type) {
+    window.currentType = type;
     // Human-readable text
     const readable = type
         .replace(/_/g, " ")
