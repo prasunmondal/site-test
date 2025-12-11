@@ -5,13 +5,18 @@ const preferredOrder = [
     "culbird_live"
 ];
 
-function logSale(type, kg) {
+function logSale(type, kg, rate, amount, saleTimestamp) {
     const allSales = JSON.parse(localStorage.getItem("salesLog") || "[]");
 
+    const recordTimestamp = new Date().toISOString();                // when saved (same in this case)
+
     allSales.push({
-        type: type,
-        kg: kg,
-        time: new Date().toISOString()
+        type,
+        kg: Number(kg),
+        rate: Number(rate),
+        amount: Number(kg) * Number(rate),
+        saleTimestamp,
+        recordTimestamp
     });
 
     localStorage.setItem("salesLog", JSON.stringify(allSales));
@@ -25,7 +30,9 @@ function getDailySalesReport() {
     const allTypes = new Set();
 
     allSales.forEach(entry => {
-        const date = entry.time.split("T")[0]; // YYYY-MM-DD
+        const date = entry.recordTimestamp
+                         ? entry.recordTimestamp.split("T")[0]
+                         : "—";; // YYYY-MM-DD
         allTypes.add(entry.type);
 
         if (!summary[date]) summary[date] = {};
@@ -120,7 +127,7 @@ function showTransactions(date, type) {
 
     // Filter matching records
     const list = allSales.filter(entry =>
-        entry.type === type && entry.time.startsWith(date)
+        entry.type === type && entry.saleTimestamp.startsWith(date)
     );
 
     document.getElementById("modalTitle").innerText =
@@ -131,20 +138,25 @@ function showTransactions(date, type) {
     if (list.length === 0) {
         html = "<p>No transactions found.</p>";
     } else {
-        list.forEach((entry) => {
-            const timeString = entry.time;
-            const displayTime = timeString.split("T")[1].slice(0,5);
+        list.forEach(entry => {
+            const saleTime = entry.saleTimestamp
+                                 ? entry.saleTimestamp.split("T")[1].slice(0,5)
+                                 : "—";
+            const recordTime = entry.recordTimestamp
+                                   ? entry.recordTimestamp.split("T")[1].slice(0,5)
+                                   : "—";
 
             html += `
             <div class="transaction-item">
                 <div>
-                    <b>${entry.kg} kg</b>
-                    <br><small>${displayTime}</small>
+                    <b>${entry.kg} kg × ₹${entry.rate}</b> = <b>₹${entry.amount}</b>
+                    <br><small>Sale: ${saleTime}</small>
+                    <br><small>Recorded: ${recordTime}</small>
                 </div>
 
                 <div style="display:flex; gap:6px;">
-                    <button class="edit-btn" onclick="editTransaction('${timeString}', ${entry.kg})">Edit</button>
-                    <button class="delete-btn" onclick="deleteTransaction('${timeString}')">Delete</button>
+                    <button class="edit-btn" onclick="editTransaction('${entry.recordTimestamp}', ${entry.kg}, ${entry.rate})">Edit</button>
+                    <button class="delete-btn" onclick="deleteTransaction('${entry.recordTimestamp}')">Delete</button>
                 </div>
             </div>
             `;
@@ -156,22 +168,33 @@ function showTransactions(date, type) {
 }
 
 
-function editTransaction(timeKey, oldKg) {
-    const newKg = prompt("Enter new KG value:", oldKg);
+function editTransaction(recordKey, oldKg, oldRate) {
+    const newKg = prompt("Enter new KG:", oldKg);
+    if (!newKg || isNaN(newKg)) return;
 
-    if (newKg === null || newKg.trim() === "" || isNaN(newKg)) return;
+    const newRate = prompt("Enter new Rate:", oldRate);
+    if (!newRate || isNaN(newRate)) return;
 
     let allSales = JSON.parse(localStorage.getItem("salesLog") || "[]");
 
-    const updated = allSales.map(entry =>
-        entry.time === timeKey ? { ...entry, kg: Number(newKg) } : entry
-    );
+    allSales = allSales.map(entry => {
+        if (entry.recordTimestamp === recordKey) {
+            return {
+                ...entry,
+                kg: Number(newKg),
+                rate: Number(newRate),
+                amount: Number(newKg) * Number(newRate)
+            };
+        }
+        return entry;
+    });
 
-    localStorage.setItem("salesLog", JSON.stringify(updated));
+    localStorage.setItem("salesLog", JSON.stringify(allSales));
 
-    showTransactions(modalDate, modalType); // refresh modal
-    showReport(); // refresh table
+    showTransactions(modalDate, modalType);
+    showReport();
 }
+
 
 
 function deleteTransaction(timeKey) {
@@ -188,30 +211,36 @@ function deleteTransaction(timeKey) {
 
 function addTransaction() {
     const kg = Number(document.getElementById("newKgInput").value);
+    const rate = Number(document.getElementById("newRateInput").value);
 
-    if (!kg || kg <= 0) {
-        alert("Enter valid KG amount.");
+    if (!kg || !rate || kg <= 0 || rate <= 0) {
+        alert("Enter valid KG and Rate.");
         return;
     }
 
-    let allSales = JSON.parse(localStorage.getItem("salesLog") || "[]");
+    const saleTimestamp = modalDate + "T" + new Date().toISOString()[1];
+    const recordTimestamp = new Date().toISOString();
 
-    // Force timestamp for the chosen DATE
-    const timestamp = modalDate + "T" + new Date().toISOString().split("T")[1];
+    let allSales = JSON.parse(localStorage.getItem("salesLog") || "[]");
 
     allSales.push({
         type: modalType,
-        kg: kg,
-        time: timestamp
+        kg,
+        rate,
+        amount: kg * rate,
+        saleTimestamp,
+        recordTimestamp
     });
 
     localStorage.setItem("salesLog", JSON.stringify(allSales));
 
     document.getElementById("newKgInput").value = "";
+    document.getElementById("newRateInput").value = "";
 
     showTransactions(modalDate, modalType);
     showReport();
 }
+
 
 
 function closeModal() {

@@ -175,6 +175,9 @@ function recalcAfterRateUpdate() {
 function saveAndClearKgAmount() {
  const kgField = document.getElementById("kg");
     const kg = parseFloat(document.getElementById("kg").value);
+        const amount = parseFloat(document.getElementById("amount").value);
+        const rate = parseInt(document.getElementById("rate"));
+
         const type = window.currentType;
 
         if (!type) {
@@ -187,7 +190,7 @@ function saveAndClearKgAmount() {
             return;
         }
 
-        logSale(type, kg);
+        logSale(type, kg, rate, amount, new Date().toISOString());
 
   document.getElementById("kg").value = "";
   document.getElementById("amount").value = "";
