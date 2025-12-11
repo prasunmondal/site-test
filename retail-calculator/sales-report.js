@@ -220,7 +220,10 @@ function addTransaction() {
         return;
     }
 
-    const saleTimestamp = modalDate + "T" + new Date().toISOString()[1];
+    // Sale timestamp = modal date + midnight
+    const saleTimestamp = `${modalDate}T00:00:00.000Z`;
+
+    // Record timestamp = actual time now
     const recordTimestamp = new Date().toISOString();
 
     let allSales = JSON.parse(localStorage.getItem("salesLog") || "[]");
@@ -242,6 +245,7 @@ function addTransaction() {
     showTransactions(modalDate, modalType);
     showReport();
 }
+
 
 
 
