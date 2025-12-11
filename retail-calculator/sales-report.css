@@ -1,0 +1,57 @@
+.report-title {
+    font-size: 22px;
+    margin-bottom: 12px;
+    color: #333;
+    font-weight: 600;
+}
+
+.table-container {
+    overflow-x: auto;
+    margin-top: 10px;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+    min-width: 500px;
+}
+
+.styled-table th {
+    background: #4CAF50;
+    color: white;
+    text-align: left;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.styled-table td {
+    padding: 10px;
+    font-size: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Zebra striping */
+.styled-table tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+/* Hover effect */
+.styled-table tbody tr:hover {
+    background: #e8f7e8;
+    transition: 0.2s;
+}
+
+/* No data message */
+.no-data {
+    background: #ffecec;
+    padding: 15px;
+    border-left: 4px solid #ff5c5c;
+    border-radius: 6px;
+    color: #444;
+    font-size: 16px;
+}

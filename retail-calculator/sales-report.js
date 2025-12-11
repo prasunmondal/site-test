@@ -1,3 +1,10 @@
+const preferredOrder = [
+    "broiler_cut",
+    "broiler_live",
+    "culbird_cut",
+    "culbird_live"
+];
+
 function logSale(type, kg) {
     const allSales = JSON.parse(localStorage.getItem("salesLog") || "[]");
 
@@ -10,31 +17,78 @@ function logSale(type, kg) {
     localStorage.setItem("salesLog", JSON.stringify(allSales));
 }
 
-function getSalesReport() {
+// Build daily × type table data
+function getDailySalesReport() {
     const allSales = JSON.parse(localStorage.getItem("salesLog") || "[]");
 
-    const summary = {};
+    const summary = {};      // summary[date][type] = total kg
+    const allTypes = new Set();
 
     allSales.forEach(entry => {
-        if (!summary[entry.type]) {
-            summary[entry.type] = 0;
-        }
-        summary[entry.type] += entry.kg;
+        const date = entry.time.split("T")[0]; // YYYY-MM-DD
+        allTypes.add(entry.type);
+
+        if (!summary[date]) summary[date] = {};
+        if (!summary[date][entry.type]) summary[date][entry.type] = 0;
+
+        summary[date][entry.type] += entry.kg;
     });
 
-    return summary;
+    return { summary, types: Array.from(allTypes) };
 }
 
-
+// Convert the data into an HTML table
 function showReport() {
-    const report = getSalesReport();
-    let html = "<h3>KG Sold Report</h3><ul>";
+    const { summary, types } = getDailySalesReport();
 
-    for (const type in report) {
-        html += `<li>${type}: <b>${report[type]} kg</b></li>`;
+    if (types.length === 0) {
+        document.getElementById("reportBox").innerHTML = `
+            <div class="no-data">No sales recorded.</div>
+        `;
+        return;
     }
 
-    html += "</ul>";
+    let html = `
+        <h3 class="report-title">Daily Sales Report (KG)</h3>
+        <div class="table-container">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+    `;
+
+    const orderedTypes = [
+        ...preferredOrder.filter(t => types.includes(t)),
+        ...types.filter(t => !preferredOrder.includes(t)).sort()
+    ];
+
+    orderedTypes.forEach(type => {
+        html += `<th>${formatTypeName(type)
+        }</th>`;
+    });
+
+    html += `
+                    </tr>
+                </thead>
+                <tbody>
+    `;
+
+    Object.keys(summary).sort().forEach(date => {
+        html += `<tr><td>${date}</td>`;
+
+        orderedTypes.forEach(type => {
+            const value = summary[date][type] || 0;
+            html += `<td>${value}</td>`;
+        });
+
+        html += `</tr>`;
+    });
+
+    html += `
+                </tbody>
+            </table>
+        </div>
+    `;
 
     document.getElementById("reportBox").innerHTML = html;
 }
@@ -42,4 +96,11 @@ function showReport() {
 
 function clearSalesReport() {
     localStorage.removeItem("salesLog");
+}
+
+function formatTypeName(type) {
+    return type
+        .split("_")
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
 }
