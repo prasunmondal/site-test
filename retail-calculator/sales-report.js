@@ -5,22 +5,24 @@ const preferredOrder = [
     "culbird_live"
 ];
 
-function logSale(type, kg, rate, amount, saleTimestamp) {
+function logSale(type, kg, rate, saleTimestamp) {
+
     const allSales = JSON.parse(localStorage.getItem("salesLog") || "[]");
 
-    const recordTimestamp = new Date().toISOString();                // when saved (same in this case)
+    const recordTimestamp = new Date().toISOString();
 
     allSales.push({
         type,
         kg: Number(kg),
         rate: Number(rate),
-        amount: Number(kg) * Number(rate),
+        amount: Number(kg) * Number(rate),  // auto compute
         saleTimestamp,
         recordTimestamp
     });
 
     localStorage.setItem("salesLog", JSON.stringify(allSales));
 }
+
 
 // Build daily × type table data
 function getDailySalesReport() {

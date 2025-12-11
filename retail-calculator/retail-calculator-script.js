@@ -173,30 +173,36 @@ function recalcAfterRateUpdate() {
     }
 
 function saveAndClearKgAmount() {
- const kgField = document.getElementById("kg");
     const kg = parseFloat(document.getElementById("kg").value);
-        const amount = parseFloat(document.getElementById("amount").value);
-        const rate = parseInt(document.getElementById("rate"));
+    const rate = parseFloat(document.getElementById("rate").value);
+    const amount = parseFloat(document.getElementById("amount").value); // optional
+    const type = window.currentType;
 
-        const type = window.currentType;
+    if (!type) {
+        console.warn("No chicken type selected — cannot log sale.");
+        return;
+    }
 
-        if (!type) {
-            console.warn("No chicken type selected — cannot log sale.");
-            return;
-        }
+    if (!kg || kg <= 0) {
+        console.warn("Invalid KG entered — skipping log.");
+        return;
+    }
 
-        if (!kg || kg <= 0) {
-            console.warn("No KG entered — skipping log.");
-            return;
-        }
+    if (!rate || rate <= 0) {
+        console.warn("Invalid RATE — cannot log sale.");
+        return;
+    }
 
-        logSale(type, kg, rate, amount, new Date().toISOString());
+    logSale(type, kg, rate, new Date().toISOString());
 
-  document.getElementById("kg").value = "";
-  document.getElementById("amount").value = "";
-  focusKg();
-  trackEvent(`RCalc: Saved`)
+    document.getElementById("kg").value = "";
+    document.getElementById("amount").value = "";
+    document.getElementById("rate").value = "";
+
+    focusKg();
+    trackEvent("RCalc: Saved");
 }
+
 
 function clearKgAmount() {
   document.getElementById("kg").value = "";
