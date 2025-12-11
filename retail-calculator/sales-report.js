@@ -78,7 +78,7 @@ function showReport() {
 
         orderedTypes.forEach(type => {
             const value = summary[date][type] || 0;
-            html += `<td>${value}</td>`;
+            html += `<td class="clickable-cell" onclick="showTransactions('${date}', '${type}')">${value}</td>`;
         });
 
         html += `</tr>`;
@@ -103,4 +103,130 @@ function formatTypeName(type) {
         .split("_")
         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
         .join(" ");
+}
+
+
+// transaction per day and delete
+
+let modalDate = "";
+let modalType = "";
+
+
+function showTransactions(date, type) {
+    modalDate = date;
+    modalType = type;
+
+    const allSales = JSON.parse(localStorage.getItem("salesLog") || "[]");
+
+    // Filter matching records
+    const list = allSales.filter(entry =>
+        entry.type === type && entry.time.startsWith(date)
+    );
+
+    document.getElementById("modalTitle").innerText =
+        `${formatTypeName(type)} — ${date}`;
+
+    let html = "";
+
+    if (list.length === 0) {
+        html = "<p>No transactions found.</p>";
+    } else {
+        list.forEach((entry) => {
+            const timeString = entry.time;
+            const displayTime = timeString.split("T")[1].slice(0,5);
+
+            html += `
+            <div class="transaction-item">
+                <div>
+                    <b>${entry.kg} kg</b>
+                    <br><small>${displayTime}</small>
+                </div>
+
+                <div style="display:flex; gap:6px;">
+                    <button class="edit-btn" onclick="editTransaction('${timeString}', ${entry.kg})">Edit</button>
+                    <button class="delete-btn" onclick="deleteTransaction('${timeString}')">Delete</button>
+                </div>
+            </div>
+            `;
+        });
+    }
+
+    document.getElementById("transactionList").innerHTML = html;
+    document.getElementById("transactionModal").style.display = "flex";
+}
+
+
+function editTransaction(timeKey, oldKg) {
+    const newKg = prompt("Enter new KG value:", oldKg);
+
+    if (newKg === null || newKg.trim() === "" || isNaN(newKg)) return;
+
+    let allSales = JSON.parse(localStorage.getItem("salesLog") || "[]");
+
+    const updated = allSales.map(entry =>
+        entry.time === timeKey ? { ...entry, kg: Number(newKg) } : entry
+    );
+
+    localStorage.setItem("salesLog", JSON.stringify(updated));
+
+    showTransactions(modalDate, modalType); // refresh modal
+    showReport(); // refresh table
+}
+
+
+function deleteTransaction(timeKey) {
+    if (!confirm("Delete this record?")) return;
+
+    let allSales = JSON.parse(localStorage.getItem("salesLog") || "[]");
+    allSales = allSales.filter(entry => entry.time !== timeKey);
+
+    localStorage.setItem("salesLog", JSON.stringify(allSales));
+
+    showTransactions(modalDate, modalType);
+    showReport();
+}
+
+function addTransaction() {
+    const kg = Number(document.getElementById("newKgInput").value);
+
+    if (!kg || kg <= 0) {
+        alert("Enter valid KG amount.");
+        return;
+    }
+
+    let allSales = JSON.parse(localStorage.getItem("salesLog") || "[]");
+
+    // Force timestamp for the chosen DATE
+    const timestamp = modalDate + "T" + new Date().toISOString().split("T")[1];
+
+    allSales.push({
+        type: modalType,
+        kg: kg,
+        time: timestamp
+    });
+
+    localStorage.setItem("salesLog", JSON.stringify(allSales));
+
+    document.getElementById("newKgInput").value = "";
+
+    showTransactions(modalDate, modalType);
+    showReport();
+}
+
+
+function closeModal() {
+    document.getElementById("transactionModal").style.display = "none";
+}
+
+function deleteTransaction(timeKey) {
+    let allSales = JSON.parse(localStorage.getItem("salesLog") || "[]");
+
+    // Remove matching entry
+    allSales = allSales.filter(entry => entry.time !== timeKey);
+
+    localStorage.setItem("salesLog", JSON.stringify(allSales));
+
+    // Refresh modal & table
+    closeModal();
+    showReport();
 }
