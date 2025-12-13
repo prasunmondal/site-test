@@ -1,4 +1,4 @@
-const whatsappNumber = "919679004046"
+const whatsappNumber = "919734075801"
 
 const accordions = document.querySelectorAll(".accordion-header");
 accordions.forEach(btn => {
