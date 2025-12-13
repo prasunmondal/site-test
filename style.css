@@ -584,7 +584,6 @@ footer {
 .prebook-form input,
 .prebook-form select,
 .prebook-form textarea {
-  width: 100%;
   padding: 12px;
   margin: 8px 0;
   border-radius: 12px;

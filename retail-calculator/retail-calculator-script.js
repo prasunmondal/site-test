@@ -170,6 +170,7 @@ function recalcAfterRateUpdate() {
       document.getElementById("rate").placeholder = "Rate";
       location.reload();
       closeSettings();
+      checkRatesAndToggleCalcCard();
     }
 
 function saveAndClearKgAmount() {
@@ -197,10 +198,11 @@ function saveAndClearKgAmount() {
 
     document.getElementById("kg").value = "";
     document.getElementById("amount").value = "";
-    document.getElementById("rate").value = "";
+//    document.getElementById("rate").value = "";
 
     focusKg();
     trackEvent("RCalc: Saved");
+    hideReportIfOpen();
 }
 
 
@@ -243,7 +245,33 @@ function focusKg() {
     kgInput.select();  // optional: highlights current text for typing quickly
 }
 
+function checkRatesAndToggleCalcCard() {
+    const r1 = localStorage.getItem("rate_broiler_live");
+    const r2 = localStorage.getItem("rate_broiler_cut");
+    const r3 = localStorage.getItem("rate_culbird_live");
+    const r4 = localStorage.getItem("rate_culbird_cut");
 
+    const hasRate =
+        (r1 && r1 !== "0") ||
+        (r2 && r2 !== "0") ||
+        (r3 && r3 !== "0") ||
+        (r4 && r4 !== "0");
 
-// Logging sales
+    const card = document.querySelector(".calc-card");
+    const msg = document.getElementById("noRateMessage");
 
+    if (!hasRate) {
+        card.style.display = "none";
+        msg.style.display = "block";
+    } else {
+        card.style.display = "block";
+        msg.style.display = "none";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", checkRatesAndToggleCalcCard);
+
+function goHome() {
+    window.location.href = "../index.html";
+    // Or put the correct path of your home screen
+}

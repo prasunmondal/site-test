@@ -47,6 +47,35 @@ function getDailySalesReport() {
     return { summary, types: Array.from(allTypes) };
 }
 
+document.getElementById("reportBox").style.display = "none";
+
+function toggleReport() {
+    const btn = document.getElementById("reportToggleBtn");
+    const box = document.getElementById("reportBox");
+
+    // If hidden → show
+    if (box.style.display === "none" || box.innerHTML.trim() === "") {
+        showReport();
+        box.style.display = "block";
+        btn.textContent = "Hide Sales Report";
+    }
+    else {
+        // If visible → hide
+        box.style.display = "none";
+        btn.textContent = "View Sales Report";
+    }
+}
+
+function hideReportIfOpen() {
+    const box = document.getElementById("reportBox");
+    const btn = document.getElementById("reportToggleBtn");
+
+    if (box && box.style.display === "block") {
+        box.style.display = "none";
+        if (btn) btn.textContent = "View Sales Report";
+    }
+}
+
 // Convert the data into an HTML table
 function showReport() {
     const { summary, types } = getDailySalesReport();
@@ -59,12 +88,12 @@ function showReport() {
     }
 
     let html = `
-        <h3 class="report-title">Daily Sales Report (KG)</h3>
         <div class="table-container">
             <table class="styled-table">
                 <thead>
                     <tr>
                         <th>Date</th>
+                        <th></th>
     `;
 
     const orderedTypes = [
@@ -84,7 +113,12 @@ function showReport() {
     `;
 
     Object.keys(summary).sort().forEach(date => {
-        html += `<tr><td>${date}</td>`;
+        html += `<tr>
+                    <td>${date}</td>
+                    <td>
+                        <button class="delete-date-btn" onclick="deleteEntireDate('${date}')">🗑️</button>
+                    </td>
+                `;
 
         orderedTypes.forEach(type => {
             const value = summary[date][type] || 0;
@@ -106,6 +140,21 @@ function showReport() {
 
 function clearSalesReport() {
     localStorage.removeItem("salesLog");
+}
+
+function deleteEntireDate(date) {
+    if (!confirm(`Delete ALL records for ${date}?`)) return;
+
+    let allSales = JSON.parse(localStorage.getItem("salesLog") || "[]");
+
+    allSales = allSales.filter(entry =>
+        !(entry.saleTimestamp && entry.saleTimestamp.startsWith(date))
+    );
+
+    localStorage.setItem("salesLog", JSON.stringify(allSales));
+
+    showReport();
+    closeModal();
 }
 
 function formatTypeName(type) {

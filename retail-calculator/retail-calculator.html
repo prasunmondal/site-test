@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="retail-calculator-style.css" />
     <link rel="stylesheet" href="sales-report.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=settings" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_back_2" />
 </head>
 
 <body>
@@ -28,6 +29,7 @@
         </div>
 
         <div class="title-row">
+            <span class="material-symbols-outlined home-btn" onclick="goHome()">arrow_back_2</span>
             <h2 class="title-soft-bold">Chicken Rate Calculator</h2>
             <span class="material-symbols-outlined settings-btn" onclick="openSettings()">settings</span>
         </div>
@@ -74,6 +76,9 @@
 <!--        <div class="choice-btn " data-type="culbird_cut" onclick="setRate('culbird_cut')"> Culbird Cut</div>-->
     </div>
 
+    <p id="noRateMessage" style="display:none; color:#777; text-align:center; margin-top:20px; font-size:12px;">
+        Click on Settings button to set the rates
+    </p>
     <!-- MAIN CALCULATOR -->
     <div class="calc-card">
 
@@ -162,7 +167,9 @@
     </div>
 </div>
 
-<button onclick="showReport()">View Sales Report</button>
+<!--<button onclick="showReport()">View Sales Report</button>-->
+<button id="reportToggleBtn" onclick="toggleReport()">View Sales Report</button>
+
 <div id="reportBox"></div>
 
 <div id="transactionModal" class="modal">
