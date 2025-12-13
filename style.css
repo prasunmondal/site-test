@@ -185,6 +185,7 @@ form button:hover {
 .accordion-content.open {
   padding: 10px;
   max-height: max-content; /* Use a large value or max-content */
+  margin-bottom: 40px;
 }
 
 .section-box { /* Used for UPI and Bank sections */
