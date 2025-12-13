@@ -196,3 +196,18 @@ if ("serviceWorker" in navigator) {
    window.location.reload();
  });
 }
+
+
+document.querySelectorAll(".accordion-header").forEach(header => {
+  header.addEventListener("click", function () {
+
+    if (this.tagName === "A") return;
+
+    setTimeout(() => {
+      const yOffset = -20; // tweak if needed
+      const y = this.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }, 150);
+  });
+});
+
