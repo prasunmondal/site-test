@@ -202,6 +202,7 @@ form button:hover {
   color: var(--primary);
   display: flex;
   align-items: center;
+  color: #B71C1C;
 }
 
 /* -------------------- PAYMENT DETAILS -------------------- */
@@ -605,20 +606,6 @@ footer {
   /* color: inherit;          /* Keep text color consistent */
 }
 
-.accordion-header {
-  /* padding: 15px 20px;
-  /* text-align: left;
-  /* cursor: pointer;
-}
-
-.bank-row,
-.details-row,
-.upi-details-row {
-  display: flex;
-  align-items: center;        /* vertically center everything */
-  justify-content: space-between;
-}
-
 html, body {
     height: 100%;
     margin: 0;
@@ -629,6 +616,51 @@ main {
     flex-direction: column;
 }
 
+
+.highlight-link {
+    background: #ffe082;
+    border: 2px solid #ffb300;
+    animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255,179,0,0.6); }
+    70% { box-shadow: 0 0 0 14px rgba(255,179,0,0); }
+    100% { box-shadow: 0 0 0 0 rgba(255,179,0,0); }
+}
+
+
+.badge-link {
+    position: relative;
+}
+
+.badge {
+    background: #e53935;
+    color: white;
+    font-size: 11px;
+    padding: 3px 7px;
+    border-radius: 10px;
+    margin-left: 6px;
+}
+
+
+
+.page-title.contrast {
+    text-align: center;
+    font-weight: 800;
+    color: #2b2b2b;           /* strong contrast */
+    margin: 18px 0 22px;
+    letter-spacing: 0.4px;
+    position: relative;
+}
+
+.page-title.contrast::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    margin: 10px auto 0;
+}
 
 footer {
     position: fixed;
