@@ -643,13 +643,17 @@ main {
     margin-left: 6px;
 }
 
-
+.page-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: #2b2b2b;
+}
 
 .page-title.contrast {
     text-align: center;
     font-weight: 800;
     color: #2b2b2b;           /* strong contrast */
-    margin: 18px 0 22px;
+    margin: 8px 0 0px;
     letter-spacing: 0.4px;
     position: relative;
 }
