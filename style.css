@@ -660,7 +660,7 @@ body {
 
 .share-grid {
     display: flex;
-    justify-content: space-between; /* left + right columns */
+    justify-content: center; /* left + right columns */
     gap: 10px;
 }
 
@@ -673,4 +673,5 @@ body {
 .share-column button {
     width: 100%;
     font-size: 12px;
+    padding: 12px;
 }
